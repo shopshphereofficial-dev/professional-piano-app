@@ -27,8 +27,13 @@ jobs:
         with:
           gradle-version: '8.4'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Build Debug APK
-        run: gradle assembleDebug --no-daemon --stacktrace
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
@@ -38,23 +43,20 @@ jobs:
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/heads/')
         with:
           tag_name: v1.0.0
           name: Piano Master Pro v1.0.0
           body: |
             ## Piano Master Professional v1.0.0
 
-            Enjoy the full concert grand piano experience directly on your Android phone!
-
-            ### Features:
-            - **88-Key Full Piano Keyboard**: Ultra-responsive multi-touch with realistic ivory feel and smooth octave scrolling.
-            - **Studio Instrument Engines**: Grand Piano, Rhodes Electric Piano, Cathedral Organ, and Lush Synth Strings.
-            - **Dual Keyboard Mode**: Play two separate octave ranges simultaneously with split view.
-            - **Studio Recorder & Playback**: Capture your songs with note accuracy and play them back live.
-            - **Song Library & Interactive Tutorials**: Learn Für Elise, Ode to Joy, Twinkle Twinkle, and Canon in D with visual key guidance.
-            - **Sustain Pedal & Metronome**: High-precision studio metronome with tap tempo and acoustic sustain simulation.
-            - **Concert Reverb & Tuning**: Built-in room acoustic reverb and scientific/solfege note labels.
+            Full concert grand piano app for Android.
+            
+            - 88-Key Full Piano Keyboard with multi-touch
+            - Grand Piano, Electric Rhodes, Church Organ, Synth Pad
+            - Dual Keyboard Mode & Octave Transpose
+            - Studio Recorder & Playback
+            - Interactive Song Library (Für Elise, Ode to Joy, Canon in D, Twinkle)
+            - Metronome & Sustain Pedal
           files: app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
