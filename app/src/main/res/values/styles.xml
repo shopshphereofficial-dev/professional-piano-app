@@ -1,7 +1,7 @@
 <resources>
-    <style name="Theme.PianoMaster" parent="android:Theme.Material.NoActionBar.Fullscreen">
-        <item name="android:windowBackground">@android:color/black</item>
+    <style name="Theme.PianoMaster" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 </resources>
