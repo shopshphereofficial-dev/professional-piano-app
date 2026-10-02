@@ -34,29 +34,51 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PianoMaster-v1.0.0-debug
+          name: PianoMaster-v1.1.0-debug
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Create GitHub Release
+      - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
-          name: Piano Master Pro v1.0.0
+          tag_name: v1.1.0
+          name: Piano Master Pro v1.1.0 - Extended Bollywood & Indian Piano Edition
           draft: false
           prerelease: false
           body: |
-            ## Piano Master Professional v1.0.0
+            ## Piano Master Pro v1.1.0 - Bollywood & Indian Piano Edition
 
-            Enjoy the full concert grand piano experience directly on your Android device!
-
-            ### Key Features:
-            - **Full 88-Key Keyboard**: Multi-touch support with realistic touch physics and quick octave slider navigation.
-            - **Studio Audio Engines**: Acoustic Grand Piano, Rhodes Electric Piano, Church Organ, and Synth Pad.
-            - **Dual-Row Split Keyboard**: Play bass line and melody simultaneously across two independent octave rows.
-            - **Performance Recorder**: Record your original pieces in real-time and replay with illuminated keys.
-            - **Interactive Song Library**: Practice Beethoven's Für Elise, Ode to Joy, Pachelbel's Canon in D, and Twinkle Twinkle with interactive guide modes.
-            - **Studio Metronome & Sustain Pedal**: Precision timing with tap tempo and acoustic sustain pedal emulation.
-            - **Reverb & Tuning Modes**: Scientific pitch notation (C4) and Solfege (Do-Re-Mi) options with concert hall acoustics.
+            ### What's New:
+            - **30+ Full Indian & Bollywood Piano Melodies**:
+              - Tum Hi Ho (Aashiqui 2)
+              - Agar Tum Saath Ho (Tamasha)
+              - Apna Bana Le (Bhediya)
+              - Heeriye (Jasleen Royal)
+              - O Maahi (Dunki)
+              - Sajni (Laapataa Ladies)
+              - Chaleya (Jawan)
+              - Hawayein (Jab Harry Met Sejal)
+              - Kaise Hua (Kabir Singh)
+              - Tujhe Kitna Chahne Lage (Kabir Singh)
+              - Phir Bhi Tumko Chaahunga
+              - Ve Maahi (Kesari)
+              - Khairiyat (Chhichhore)
+              - Ishq Wala Love
+              - Samjhawan
+              - Pehli Dafa
+              - Tera Ban Jaunga
+              - Humnava Mere
+              - Kaise Mujhe (Ghajini)
+              - Iktara (Wake Up Sid)
+              - Iraaday & Bikhra (Abdul Hannan)
+              - Husn, Jo Tum Mere Ho, Alag Aasmaan (Anuv Jain)
+              - Maan Meri Jaan (King)
+              - Satranga (Animal)
+              - Ve Kamleya
+              - Tere Vaaste
+              - Marjaavan Tune & Classics (Für Elise, Canon in D)
+            - **Extended 30–60+ Second Arrangements**: Detailed verses, hooks, and choruses with dual-hand / octave-adapted notes.
+            - **Interactive Practice & Auto-Play Modes**: Watch glowing keys play each song or practice with visual note indicators.
+            - **Full 88-Key Concert Keyboard**: Multi-touch polyphony, 4 instrument sounds, metronome & sustain pedal.
           files: app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
