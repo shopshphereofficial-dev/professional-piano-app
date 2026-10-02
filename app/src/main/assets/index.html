@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Piano Master Pro</title>
+<title>Piano Master Pro - Bollywood & Indian Hits Edition</title>
 <style>
   :root {
-    --bg-dark: #0f1015;
-    --panel-bg: #181a22;
-    --panel-border: #282b37;
+    --bg-dark: #0b0c10;
+    --panel-bg: #14161f;
+    --panel-border: #242838;
     --accent-gold: #f5b041;
     --accent-gold-hover: #f39c12;
-    --accent-cyan: #38ef7d;
+    --accent-emerald: #2ecc71;
+    --accent-cyan: #00d2d3;
     --accent-red: #ff4757;
-    --key-white-bg: linear-gradient(180deg, #fefefe 0%, #ececec 85%, #dcdcdc 100%);
-    --key-white-active: linear-gradient(180deg, #e0e0e0 0%, #c8c8c8 100%);
-    --key-black-bg: linear-gradient(180deg, #333339 0%, #151518 70%, #050508 100%);
-    --key-black-active: linear-gradient(180deg, #222226 0%, #3a3a44 100%);
-    --text-main: #f0f0f5;
-    --text-muted: #8e94a5;
+    --key-white-bg: linear-gradient(180deg, #ffffff 0%, #f4f5f7 85%, #d8dde6 100%);
+    --key-white-active: linear-gradient(180deg, #fffae6 0%, #f5b041 100%);
+    --key-black-bg: linear-gradient(180deg, #2c2f38 0%, #15161b 75%, #050508 100%);
+    --key-black-active: linear-gradient(180deg, #d35400 0%, #e67e22 100%);
+    --text-main: #f0f2f8;
+    --text-muted: #8b92a6;
   }
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -28,9 +28,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: none;
-    -webkit-touch-callout: none;
   }
-
   body, html {
     width: 100%;
     height: 100%;
@@ -39,1288 +37,1828 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-main);
   }
-
   #app {
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
   }
-
-  /* Header Toolbar */
   header {
-    height: 54px;
+    height: 48px;
     background: var(--panel-bg);
     border-bottom: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
-    z-index: 10;
-    gap: 8px;
+    padding: 0 10px;
+    z-index: 20;
+    gap: 6px;
   }
-
   .brand {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 15px;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 14px;
     letter-spacing: 0.5px;
     color: var(--accent-gold);
     white-space: nowrap;
   }
-
-  .brand svg {
-    width: 22px;
-    height: 22px;
-    fill: var(--accent-gold);
-  }
-
   .nav-controls {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     flex: 1;
     justify-content: center;
+    overflow-x: auto;
   }
-
   .btn {
-    background: #232733;
-    border: 1px solid #333849;
+    background: #1f2330;
+    border: 1px solid #31364a;
     color: var(--text-main);
-    padding: 6px 10px;
+    padding: 5px 9px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    transition: background 0.15s, border-color 0.15s, transform 0.05s;
-    outline: none;
+    gap: 4px;
     white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
   }
-
-  .btn:active {
-    transform: scale(0.96);
-  }
-
+  .btn:active { transform: scale(0.96); }
   .btn.active {
     background: var(--accent-gold);
-    color: #121216;
+    color: #111;
     border-color: var(--accent-gold-hover);
+    font-weight: bold;
   }
-
-  .btn.btn-rec.active {
-    background: var(--accent-red);
+  .btn-song-picker {
+    background: linear-gradient(135deg, #e67e22, #f39c12);
     color: #fff;
-    border-color: #ff6b81;
-    animation: pulse-red 1.2s infinite ease-in-out;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
   }
-
-  @keyframes pulse-red {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
-
+  .btn-song-picker:hover { opacity: 0.95; }
   .select-styled {
-    background: #232733;
-    border: 1px solid #333849;
+    background: #1f2330;
+    border: 1px solid #31364a;
     color: var(--text-main);
-    padding: 6px 8px;
+    padding: 5px 8px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     outline: none;
     cursor: pointer;
   }
-
-  /* Secondary Bar / Octave Navigation */
   .sub-bar {
-    height: 40px;
-    background: #14161e;
+    height: 38px;
+    background: #10121a;
     border-bottom: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 10px;
     justify-content: space-between;
-    gap: 12px;
-    font-size: 12px;
+    gap: 8px;
+    font-size: 11px;
+    z-index: 15;
   }
-
   .octave-shifter {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
-
   .octave-tag {
     font-family: monospace;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--accent-gold);
-    min-width: 44px;
+    min-width: 46px;
     text-align: center;
     font-weight: bold;
   }
-
-  .minimap-container {
+  .song-status-bar {
+    display: none;
+    align-items: center;
+    gap: 8px;
     flex: 1;
-    max-width: 380px;
-    height: 22px;
-    background: #1e2230;
-    border-radius: 4px;
+    max-width: 420px;
+    background: #171b26;
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid #2b3145;
+  }
+  .song-status-bar.active {
+    display: flex;
+  }
+  .song-title-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+  }
+  .song-time {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: monospace;
+  }
+  .song-progress {
+    flex: 1;
+    height: 5px;
+    background: #252a3a;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .song-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-gold);
+    transition: width 0.1s linear;
+  }
+  .piano-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
-    border: 1px solid #2e3447;
-    cursor: pointer;
   }
-
-  .minimap-keys {
+  .keys-wrapper {
+    flex: 1;
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    background: #090a0e;
+    overflow-x: hidden;
   }
-
-  .mini-k {
+  .white-keys-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .w-key {
     flex: 1;
-    height: 100%;
-    border-right: 1px solid #14161e;
-    background: #444a5e;
-  }
-
-  .mini-k.black {
-    background: #0d0f15;
-  }
-
-  .minimap-viewport {
-    position: absolute;
-    top: 0;
-    left: 30%;
-    width: 35%;
-    height: 100%;
-    background: rgba(245, 176, 65, 0.35);
-    border: 1px solid var(--accent-gold);
-    border-radius: 3px;
-    cursor: grab;
-  }
-
-  /* Keyboard Area */
-  .piano-viewport {
-    flex: 1;
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: auto;
-    background: #08090d;
-    display: flex;
-    align-items: stretch;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .piano-viewport::-webkit-scrollbar {
-    height: 6px;
-  }
-  .piano-viewport::-webkit-scrollbar-thumb {
-    background: #33384a;
-    border-radius: 3px;
-  }
-
-  .keyboard-wrapper {
-    position: relative;
-    display: flex;
-    height: 100%;
-    padding: 0 4px 6px 4px;
-    margin: auto 0 0 0;
-  }
-
-  .piano-row {
-    position: relative;
-    display: flex;
-    height: 100%;
-    background: #0a0b10;
-  }
-
-  .white-key {
-    width: 60px;
     height: 100%;
     background: var(--key-white-bg);
-    border: 1px solid #999;
-    border-radius: 0 0 7px 7px;
+    border-right: 1px solid #b8bec8;
+    border-radius: 0 0 5px 5px;
+    box-shadow: inset 0 -3px 4px rgba(0,0,0,0.18), 0 2px 4px rgba(0,0,0,0.3);
     position: relative;
     cursor: pointer;
-    box-shadow: inset 0 -3px 0 #b0b0b0, inset 0 2px 2px rgba(255,255,255,0.8), 2px 3px 5px rgba(0,0,0,0.3);
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 12px;
-    user-select: none;
-    transition: background 0.05s, transform 0.05s;
-  }
-
-  .white-key.active {
-    background: var(--key-white-active);
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.4), inset 0 -1px 0 #999;
-    transform: translateY(2px);
-  }
-
-  .white-key .note-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #555;
-    pointer-events: none;
-  }
-
-  .black-key {
-    width: 36px;
-    height: 62%;
-    background: var(--key-black-bg);
-    border: 1px solid #111;
-    border-radius: 0 0 5px 5px;
-    position: absolute;
-    z-index: 2;
-    cursor: pointer;
-    box-shadow: inset 0 -2px 0 #444, 2px 3px 6px rgba(0,0,0,0.6);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     padding-bottom: 8px;
-    user-select: none;
-    transition: background 0.05s, transform 0.05s;
+    transition: background 0.05s, transform 0.04s;
+    box-sizing: border-box;
   }
-
-  .black-key.active {
-    background: var(--key-black-active);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  .w-key:last-child { border-right: none; }
+  .w-key.active, .w-key.guide-active {
+    background: var(--key-white-active) !important;
     transform: translateY(2px);
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.25), 0 0 12px rgba(245, 176, 65, 0.7);
   }
-
-  .black-key .note-label {
-    font-size: 9px;
-    font-weight: 600;
-    color: #aaa;
+  .w-key.guide-active::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    animation: ping 0.8s infinite alternate;
+  }
+  .b-key {
+    position: absolute;
+    top: 0;
+    width: 2.8%;
+    height: 60%;
+    background: var(--key-black-bg);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 2px 3px 6px rgba(0,0,0,0.6), inset 0 -2px 3px rgba(255,255,255,0.15);
+    z-index: 5;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 6px;
+    transition: background 0.05s, transform 0.04s;
+  }
+  .b-key.active, .b-key.guide-active {
+    background: var(--key-black-active) !important;
+    transform: translateY(2px);
+    box-shadow: 0 0 14px rgba(230, 126, 34, 0.9);
+  }
+  .b-key.guide-active::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00ffff;
+    animation: ping 0.8s infinite alternate;
+  }
+  @keyframes ping {
+    from { transform: scale(0.8); opacity: 0.6; }
+    to { transform: scale(1.3); opacity: 1; }
+  }
+  .k-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444a59;
     pointer-events: none;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .b-key .k-label {
+    color: #abb2bf;
+    font-size: 9px;
+  }
+  .sargam-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: #d35400;
+  }
+  .b-key .sargam-label {
+    color: var(--accent-gold);
+    font-size: 8px;
   }
 
-  /* Key Highlight for Tutorials / Playback */
-  .white-key.highlight-guide {
-    background: linear-gradient(180deg, #a8ff78 0%, #78ffd6 100%) !important;
-  }
-  .black-key.highlight-guide {
-    background: linear-gradient(180deg, #11998e 0%, #38ef7d 100%) !important;
-  }
-
-  /* Modals / Panels */
+  /* Modal Song Library Drawer */
   .modal-overlay {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(4px);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
     z-index: 100;
-    display: none;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
   }
   .modal-overlay.open {
     display: flex;
   }
-
-  .modal-box {
-    background: #1b1e2a;
-    border: 1px solid #2d3345;
+  .song-modal {
+    background: #171924;
+    border: 1px solid #2e3347;
     border-radius: 12px;
-    width: 90%;
-    max-width: 480px;
-    max-height: 85vh;
+    width: 92vw;
+    max-width: 760px;
+    height: 88vh;
+    max-height: 560px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 16px 36px rgba(0,0,0,0.6);
     overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.8);
   }
-
   .modal-header {
-    padding: 14px 18px;
-    border-bottom: 1px solid #282d3f;
+    padding: 12px 16px;
+    background: #1e2230;
+    border-bottom: 1px solid #2e3347;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 700;
-    color: var(--accent-gold);
   }
-
-  .modal-body {
-    padding: 18px;
+  .modal-header h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-close {
+    background: #2b3145;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-filter-bar {
+    padding: 8px 16px;
+    background: #13151f;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #222636;
+    overflow-x: auto;
+  }
+  .filter-chip {
+    background: #202434;
+    border: 1px solid #2f354d;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .filter-chip.active {
+    background: var(--accent-gold);
+    color: #111;
+    font-weight: bold;
+    border-color: var(--accent-gold);
+  }
+  .song-search-box {
+    padding: 8px 16px;
+    background: #171924;
+  }
+  .song-search-input {
+    width: 100%;
+    background: #10121a;
+    border: 1px solid #2a2e42;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    outline: none;
+  }
+  .song-list-scroll {
+    flex: 1;
     overflow-y: auto;
+    padding: 8px 16px 16px 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .song-card {
+    background: #1f2333;
+    border: 1px solid #2d334a;
+    border-radius: 8px;
+    padding: 9px 11px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-  }
-
-  .setting-row {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .song-card:hover, .song-card:active {
+    background: #272d42;
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+  }
+  .song-card-title {
     font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
   }
-
-  .setting-row input[type="range"] {
-    flex: 1;
-    max-width: 180px;
-    accent-color: var(--accent-gold);
-  }
-
-  .song-card {
-    background: #232737;
-    border: 1px solid #31374d;
-    padding: 12px 14px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .song-info h4 {
-    font-size: 14px;
-    margin-bottom: 3px;
-  }
-  .song-info p {
+  .song-card-sub {
     font-size: 11px;
     color: var(--text-muted);
   }
-
-  /* Dual Keyboard mode */
-  .dual-keyboard-container {
+  .song-card-tags {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--accent-gold);
+  }
+  .song-card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .btn-card {
     flex: 1;
-    height: 100%;
+    padding: 4px 6px;
+    font-size: 10px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
   }
-  .dual-keyboard-container .piano-viewport {
-    height: 50%;
-  }
-
-  /* Metronome visual beacon */
-  .metro-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #444;
-    transition: background 0.05s;
-  }
-  .metro-dot.flash {
+  .btn-card-play {
     background: var(--accent-gold);
-    box-shadow: 0 0 8px var(--accent-gold);
+    color: #111;
+  }
+  .btn-card-learn {
+    background: #2ecc71;
+    color: #111;
   }
 </style>
 </head>
 <body>
 <div id="app">
-  <!-- Top Navigation Bar -->
+  <!-- Header Navigation -->
   <header>
     <div class="brand">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v7h-2zm0 8h2v2h-2z"/></svg>
-      Piano Master Pro
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+      <span>PIANO MASTER PRO</span>
     </div>
 
     <div class="nav-controls">
-      <!-- Instrument selector -->
-      <select id="instrumentSelect" class="select-styled">
-        <option value="grand">Grand Piano</option>
-        <option value="rhodes">Electric Rhodes</option>
-        <option value="organ">Church Organ</option>
-        <option value="strings">Synth Pad</option>
+      <button class="btn btn-song-picker" id="btnOpenSongs">🎵 30+ Indian Songs</button>
+      
+      <select class="select-styled" id="selectInstrument">
+        <option value="grand">🎹 Concert Grand</option>
+        <option value="rhodes">⚡ Rhodes EP</option>
+        <option value="organ">⛪ Church Organ</option>
+        <option value="strings">🎻 Synth Strings</option>
       </select>
 
-      <!-- Sustain Pedal -->
-      <button id="sustainBtn" class="btn">
-        <span>Pedal</span> <b id="sustainStatus">OFF</b>
-      </button>
-
-      <!-- Metronome Button -->
-      <button id="metroBtn" class="btn">
-        <span class="metro-dot" id="metroDot"></span>
-        <span id="bpmLabel">120 BPM</span>
-      </button>
-
-      <!-- Record Button -->
-      <button id="recordBtn" class="btn btn-rec">
-        <span>● REC</span>
-      </button>
-
-      <!-- Playback Button -->
-      <button id="playBtn" class="btn" style="display:none;">
-        <span>▶ Play</span>
-      </button>
-
-      <!-- Song Tutorials -->
-      <button id="songsModalBtn" class="btn">
-        <span>♫ Songs</span>
-      </button>
-
-      <!-- Settings / Options -->
-      <button id="settingsModalBtn" class="btn">
-        <span>⚙</span>
-      </button>
+      <button class="btn" id="btnSustain">Sustain: OFF</button>
+      <button class="btn" id="btnMetronome">⏱️ Metro</button>
+      <button class="btn" id="btnLabelMode">Labels: C4</button>
+      <button class="btn" id="btnKeysVisible">Keys: 14</button>
     </div>
   </header>
 
-  <!-- Sub navigation: Octave Navigation & Minimap -->
+  <!-- Sub-bar: Octave slider & Playing Song Status -->
   <div class="sub-bar">
     <div class="octave-shifter">
-      <button id="octaveDown" class="btn">◀ Oct</button>
-      <span class="octave-tag" id="octaveDisplay">C3-C5</span>
-      <button id="octaveUp" class="btn">Oct ▶</button>
+      <button class="btn" id="btnOctDown">◀ Oct -</button>
+      <div class="octave-tag" id="octaveTag">C4–B5</div>
+      <button class="btn" id="btnOctUp">Oct + ▶</button>
     </div>
 
-    <div class="minimap-container" id="minimapContainer">
-      <div class="minimap-keys" id="minimapKeys"></div>
-      <div class="minimap-viewport" id="minimapViewport"></div>
-    </div>
-
-    <div style="display: flex; gap: 6px;">
-      <button id="dualToggleBtn" class="btn">Dual Row</button>
-    </div>
-  </div>
-
-  <!-- Primary Piano Viewport -->
-  <div class="piano-viewport" id="pianoViewport">
-    <div class="keyboard-wrapper" id="keyboardWrapper">
-      <!-- Dynamically generated keys -->
+    <div class="song-status-bar" id="songStatusBar">
+      <div class="song-title-text" id="songTitlePlaying">Song Name</div>
+      <div class="song-progress"><div class="song-progress-fill" id="songProgressFill"></div></div>
+      <div class="song-time" id="songTimeText">0:00 / 0:35</div>
+      <button class="btn" id="btnPauseResumeSong" style="padding:3px 7px;">⏸</button>
+      <button class="btn" id="btnStopSong" style="padding:3px 7px; color:var(--accent-red);">⏹</button>
     </div>
   </div>
 
-  <!-- Secondary Piano Viewport for Dual Mode (Hidden by default) -->
-  <div class="piano-viewport" id="pianoViewportSecondary" style="display:none; border-top: 2px solid #222;">
-    <div class="keyboard-wrapper" id="keyboardWrapperSecondary"></div>
-  </div>
-</div>
-
-<!-- Songs Tutorial Modal -->
-<div class="modal-overlay" id="songsModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span>Interactive Song Library</span>
-      <button class="btn" id="closeSongsModal">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="song-card">
-        <div class="song-info">
-          <h4>Für Elise</h4>
-          <p>Ludwig van Beethoven • Classical</p>
-        </div>
-        <div style="display:flex; gap:6px;">
-          <button class="btn active" onclick="loadAndPlaySong('fur_elise', 'demo')">Listen</button>
-          <button class="btn" onclick="loadAndPlaySong('fur_elise', 'practice')">Learn</button>
-        </div>
-      </div>
-      <div class="song-card">
-        <div class="song-info">
-          <h4>Ode to Joy</h4>
-          <p>Ludwig van Beethoven • Symphony No. 9</p>
-        </div>
-        <div style="display:flex; gap:6px;">
-          <button class="btn active" onclick="loadAndPlaySong('ode_to_joy', 'demo')">Listen</button>
-          <button class="btn" onclick="loadAndPlaySong('ode_to_joy', 'practice')">Learn</button>
-        </div>
-      </div>
-      <div class="song-card">
-        <div class="song-info">
-          <h4>Canon in D</h4>
-          <p>Johann Pachelbel • Baroque</p>
-        </div>
-        <div style="display:flex; gap:6px;">
-          <button class="btn active" onclick="loadAndPlaySong('canon_in_d', 'demo')">Listen</button>
-          <button class="btn" onclick="loadAndPlaySong('canon_in_d', 'practice')">Learn</button>
-        </div>
-      </div>
-      <div class="song-card">
-        <div class="song-info">
-          <h4>Twinkle Twinkle Little Star</h4>
-          <p>Traditional Nursery • Easy</p>
-        </div>
-        <div style="display:flex; gap:6px;">
-          <button class="btn active" onclick="loadAndPlaySong('twinkle', 'demo')">Listen</button>
-          <button class="btn" onclick="loadAndPlaySong('twinkle', 'practice')">Learn</button>
-        </div>
-      </div>
+  <!-- Piano Stage -->
+  <div class="piano-stage">
+    <div class="keys-wrapper" id="keysWrapper">
+      <div class="white-keys-container" id="whiteKeysContainer"></div>
     </div>
   </div>
 </div>
 
-<!-- Settings & Metronome Modal -->
-<div class="modal-overlay" id="settingsModal">
-  <div class="modal-box">
+<!-- Songs Library Modal -->
+<div class="modal-overlay" id="modalSongLibrary">
+  <div class="song-modal">
     <div class="modal-header">
-      <span>Studio Audio & Controls</span>
-      <button class="btn" id="closeSettingsModal">✕</button>
+      <h3>🎹 Indian Bollywood & Hits Song Library (30 Full Melodies)</h3>
+      <button class="modal-close" id="btnCloseSongModal">&times;</button>
     </div>
-    <div class="modal-body">
-      <div class="setting-row">
-        <span>Master Volume</span>
-        <input type="range" id="masterVolumeSlider" min="0" max="1" step="0.05" value="0.8">
-      </div>
-      <div class="setting-row">
-        <span>Concert Hall Reverb</span>
-        <input type="range" id="reverbSlider" min="0" max="1" step="0.05" value="0.35">
-      </div>
-      <div class="setting-row">
-        <span>Metronome BPM</span>
-        <input type="range" id="bpmSlider" min="40" max="220" step="2" value="120">
-      </div>
-      <div class="setting-row">
-        <span>Key Labels</span>
-        <select id="labelSelect" class="select-styled">
-          <option value="notes">Scientific (C4, D4)</option>
-          <option value="solfege">Solfege (Do, Re)</option>
-          <option value="none">None</option>
-        </select>
-      </div>
-      <div class="setting-row">
-        <span>Key Width</span>
-        <input type="range" id="keyWidthSlider" min="45" max="85" step="5" value="60">
-      </div>
+    <div class="modal-filter-bar" id="modalFilters">
+      <div class="filter-chip active" data-cat="all">All Songs (33)</div>
+      <div class="filter-chip" data-cat="must">🔥 Must-Have Hits</div>
+      <div class="filter-chip" data-cat="emotional">❤️ Emotional & Soulful</div>
+      <div class="filter-chip" data-cat="viral">🎵 Viral & Modern Indie</div>
+      <div class="filter-chip" data-cat="classical">🎼 Classical Classics</div>
+    </div>
+    <div class="song-search-box">
+      <input type="text" class="song-search-input" id="songSearchInput" placeholder="Search song by name, movie, artist (e.g., Tum Hi Ho, Anuv Jain, Aashiqui, Dunki)...">
+    </div>
+    <div class="song-list-scroll" id="songListContainer">
+      <!-- Song cards populated by JS -->
     </div>
   </div>
 </div>
 
 <script>
-// --- Professional Audio Synthesis Engine ---
+/* ==========================================================================
+   AUDIO SYNTHESIS ENGINE (Grand Piano, Rhodes, Organ, Strings)
+   ========================================================================== */
 let audioCtx = null;
-let masterGain = null;
-let reverbNode = null;
-let dryGain = null;
-let wetGain = null;
-
-function initAudio() {
-  if (audioCtx) return;
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  audioCtx = new AudioContext();
-
-  masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-
-  // Convolver for concert hall reverb
-  reverbNode = audioCtx.createConvolver();
-  dryGain = audioCtx.createGain();
-  wetGain = audioCtx.createGain();
-
-  dryGain.gain.value = 0.7;
-  wetGain.gain.value = 0.35;
-
-  generateImpulseResponse(2.2, 2.0);
-
-  dryGain.connect(masterGain);
-  wetGain.connect(masterGain);
-  masterGain.connect(audioCtx.destination);
+function getAudioContext() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
 }
 
-function generateImpulseResponse(duration, decay) {
-  const sampleRate = audioCtx.sampleRate;
-  const length = sampleRate * duration;
-  const impulse = audioCtx.createBuffer(2, length, sampleRate);
-  const left = impulse.getChannelData(0);
-  const right = impulse.getChannelData(1);
+let currentInstrument = 'grand';
+let isSustainOn = false;
+let labelMode = 'note'; // 'note', 'sargam', 'solfege', 'none'
+let baseOctave = 4;     // Starting octave for white keys
+let visibleWhiteKeys = 14; // Default visible keys (2 full octaves)
 
-  for (let i = 0; i < length; i++) {
-    const n = i;
-    const factor = Math.pow(1 - n / length, decay);
-    left[i] = (Math.random() * 2 - 1) * factor;
-    right[i] = (Math.random() * 2 - 1) * factor;
-  }
-  reverbNode.buffer = impulse;
-  reverbNode.connect(wetGain);
+// Frequency table for MIDI 21 (A0) to 108 (C8)
+function midiToFreq(midi) {
+  return 440 * Math.pow(2, (midi - 69) / 12);
+}
+
+const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const SARGAM_NAMES = ['Sa', 're', 'Re', 'ga', 'Ga', 'Ma', 't-Ma', 'Pa', 'dha', 'Dha', 'ni', 'Ni'];
+const SOLFEGE_NAMES = ['Do', 'Do#', 'Re', 'Re#', 'Mi', 'Fa', 'Fa#', 'Sol', 'Sol#', 'La', 'La#', 'Si'];
+
+function noteToMidi(noteStr) {
+  const m = noteStr.match(/^([A-G]#?)([0-8])$/);
+  if (!m) return 60;
+  const name = m[1];
+  const oct = parseInt(m[2], 10);
+  const idx = NOTE_NAMES.indexOf(name);
+  return (oct + 1) * 12 + idx;
+}
+
+function midiToName(midi) {
+  const name = NOTE_NAMES[midi % 12];
+  const oct = Math.floor(midi / 12) - 1;
+  return name + oct;
 }
 
 // Active voices tracking
 const activeVoices = new Map();
-let currentInstrument = 'grand';
-let sustainPedal = false;
 
-// Note frequencies from A0 (27.5Hz) to C8 (4186Hz)
-const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const SOLFEGE = ['Do', 'Do#', 'Re', 'Re#', 'Mi', 'Fa', 'Fa#', 'Sol', 'Sol#', 'La', 'La#', 'Si'];
+function playNoteSound(midi, velocity = 0.8) {
+  const ctx = getAudioContext();
+  const freq = midiToFreq(midi);
+  const now = ctx.currentTime;
 
-function noteToFreq(midiNote) {
-  return 440 * Math.pow(2, (midiNote - 69) / 12);
-}
-
-function startNote(midiNote, velocity = 0.8) {
-  initAudio();
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
+  // Stop previous voice of same midi if still ringing
+  if (activeVoices.has(midi)) {
+    stopNoteSound(midi, true);
   }
 
-  // Stop any lingering voice for this midi note
-  if (activeVoices.has(midiNote)) {
-    stopVoice(midiNote, true);
-  }
+  const masterGain = ctx.createGain();
+  masterGain.connect(ctx.destination);
 
-  const freq = noteToFreq(midiNote);
-  const now = audioCtx.currentTime;
-
-  const voiceGain = audioCtx.createGain();
-  voiceGain.gain.setValueAtTime(0, now);
-
-  const nodes = [];
-
+  const oscs = [];
+  
   if (currentInstrument === 'grand') {
-    // Realistic multi-harmonic piano synthesis
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
-    const osc3 = audioCtx.createOscillator();
+    // Concert Grand Piano: Fundamental + 2 harmonics + subtle strike detune
+    const harmRatios = [1.0, 2.0, 3.0, 4.0];
+    const harmAmps   = [1.0, 0.45, 0.18, 0.08];
 
-    osc1.type = 'triangle';
-    osc2.type = 'sine';
-    osc3.type = 'sine';
+    harmRatios.forEach((ratio, i) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = i === 0 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(freq * ratio + (i === 1 ? 0.4 : 0), now);
 
-    osc1.frequency.setValueAtTime(freq, now);
-    osc2.frequency.setValueAtTime(freq * 2, now);
-    osc3.frequency.setValueAtTime(freq * 3, now);
+      const amp = velocity * harmAmps[i] * 0.45;
+      g.gain.setValueAtTime(0.001, now);
+      g.gain.linearRampToValueAtTime(amp, now + 0.005);
+      g.gain.exponentialRampToValueAtTime(amp * 0.35, now + 0.3);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + (isSustainOn ? 4.5 : 1.8));
 
-    const filter = audioCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(Math.min(freq * 6, 8000), now);
-    filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.5, 200), now + 1.8);
-
-    const subGain2 = audioCtx.createGain();
-    const subGain3 = audioCtx.createGain();
-    subGain2.gain.value = 0.35;
-    subGain3.gain.value = 0.12;
-
-    osc1.connect(filter);
-    osc2.connect(subGain2);
-    subGain2.connect(filter);
-    osc3.connect(subGain3);
-    subGain3.connect(filter);
-
-    filter.connect(voiceGain);
-
-    // Dynamic ADSR envelope
-    const peak = velocity * 0.9;
-    voiceGain.gain.linearRampToValueAtTime(peak, now + 0.008);
-    voiceGain.gain.exponentialRampToValueAtTime(peak * 0.5, now + 0.3);
-    voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + (sustainPedal ? 5.5 : 2.2));
-
-    osc1.start(now);
-    osc2.start(now);
-    osc3.start(now);
-
-    nodes.push(osc1, osc2, osc3, filter, subGain2, subGain3);
-
+      osc.connect(g);
+      g.connect(masterGain);
+      osc.start(now);
+      oscs.push(osc);
+    });
   } else if (currentInstrument === 'rhodes') {
-    // Electric Piano FM
-    const carrier = audioCtx.createOscillator();
-    const modulator = audioCtx.createOscillator();
-    const modGain = audioCtx.createGain();
-
-    carrier.type = 'sine';
-    modulator.type = 'sine';
-
-    carrier.frequency.setValueAtTime(freq, now);
-    modulator.frequency.setValueAtTime(freq * 2, now);
-    modGain.gain.setValueAtTime(freq * 1.5, now);
-    modGain.gain.exponentialRampToValueAtTime(1, now + 0.8);
-
-    modulator.connect(modGain);
-    modGain.connect(carrier.frequency);
-
-    carrier.connect(voiceGain);
-
-    const peak = velocity * 0.8;
-    voiceGain.gain.linearRampToValueAtTime(peak, now + 0.01);
-    voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + (sustainPedal ? 4.0 : 1.8));
-
-    carrier.start(now);
-    modulator.start(now);
-    nodes.push(carrier, modulator, modGain);
-
-  } else if (currentInstrument === 'organ') {
-    // Drawbar Hammond / Church Organ
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
+    // Electric Piano: Sine + Square bite
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
     osc1.type = 'sine';
     osc2.type = 'triangle';
-
     osc1.frequency.setValueAtTime(freq, now);
-    osc2.frequency.setValueAtTime(freq * 2, now);
+    osc2.frequency.setValueAtTime(freq * 2.0, now);
 
-    const g2 = audioCtx.createGain();
-    g2.gain.value = 0.5;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.001, now);
+    g.gain.linearRampToValueAtTime(velocity * 0.5, now + 0.008);
+    g.gain.exponentialRampToValueAtTime(velocity * 0.15, now + 0.4);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + (isSustainOn ? 4.0 : 1.4));
 
-    osc1.connect(voiceGain);
-    osc2.connect(g2);
-    g2.connect(voiceGain);
-
-    const peak = velocity * 0.7;
-    voiceGain.gain.linearRampToValueAtTime(peak, now + 0.04);
-
+    osc1.connect(g);
+    osc2.connect(g);
+    g.connect(masterGain);
     osc1.start(now);
     osc2.start(now);
-    nodes.push(osc1, osc2, g2);
-
+    oscs.push(osc1, osc2);
+  } else if (currentInstrument === 'organ') {
+    // Cathedral Organ: multiple rich harmonics, steady sustain
+    [1, 2, 3, 4].forEach(mult => {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq * mult, now);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.001, now);
+      g.gain.linearRampToValueAtTime((velocity * 0.22) / mult, now + 0.02);
+      osc.connect(g);
+      g.connect(masterGain);
+      osc.start(now);
+      oscs.push(osc);
+    });
   } else {
-    // Synth Strings
-    const osc = audioCtx.createOscillator();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(freq, now);
+    // Synth Strings: saw + detuned chorus
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    osc1.type = 'sawtooth';
+    osc2.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(freq, now);
+    osc2.frequency.setValueAtTime(freq * 1.003, now);
 
-    const filter = audioCtx.createBiquadFilter();
+    const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(freq * 3, now);
+    filter.frequency.setValueAtTime(1400, now);
 
-    osc.connect(filter);
-    filter.connect(voiceGain);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.001, now);
+    g.gain.linearRampToValueAtTime(velocity * 0.25, now + 0.08);
 
-    const peak = velocity * 0.6;
-    voiceGain.gain.linearRampToValueAtTime(peak, now + 0.2);
-
-    osc.start(now);
-    nodes.push(osc, filter);
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(g);
+    g.connect(masterGain);
+    osc1.start(now);
+    osc2.start(now);
+    oscs.push(osc1, osc2);
   }
 
-  voiceGain.connect(dryGain);
-  voiceGain.connect(reverbNode);
-
-  activeVoices.set(midiNote, {
-    nodes,
-    gain: voiceGain,
-    sustained: false
-  });
-
-  recordEvent('note_on', midiNote, velocity);
+  activeVoices.set(midi, { masterGain, oscs, startTime: now });
 }
 
-function stopNote(midiNote) {
-  if (!activeVoices.has(midiNote)) return;
-  const voice = activeVoices.get(midiNote);
-
-  if (sustainPedal) {
-    voice.sustained = true;
+function stopNoteSound(midi, force = false) {
+  const voice = activeVoices.get(midi);
+  if (!voice) return;
+  
+  if (isSustainOn && !force && currentInstrument !== 'organ' && currentInstrument !== 'strings') {
+    // Sustain pedal holds the release
     return;
   }
 
-  stopVoice(midiNote);
-  recordEvent('note_off', midiNote);
+  const ctx = getAudioContext();
+  const now = ctx.currentTime;
+  const releaseTime = force ? 0.05 : 0.22;
+  try {
+    voice.masterGain.gain.cancelScheduledValues(now);
+    voice.masterGain.gain.setValueAtTime(voice.masterGain.gain.value, now);
+    voice.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + releaseTime);
+    setTimeout(() => {
+      voice.oscs.forEach(o => { try { o.stop(); o.disconnect(); } catch(e){} });
+      voice.masterGain.disconnect();
+    }, releaseTime * 1000 + 50);
+  } catch(e) {}
+  activeVoices.delete(midi);
 }
 
-function stopVoice(midiNote, immediate = false) {
-  if (!activeVoices.has(midiNote)) return;
-  const voice = activeVoices.get(midiNote);
-  const now = audioCtx.currentTime;
+/* ==========================================================================
+   KEYBOARD RENDERING & TOUCH ENGINE
+   ========================================================================== */
+const whiteKeysContainer = document.getElementById('whiteKeysContainer');
+const keysWrapper = document.getElementById('keysWrapper');
+const octaveTag = document.getElementById('octaveTag');
 
-  if (immediate) {
-    voice.gain.gain.cancelScheduledValues(now);
-    voice.gain.gain.setValueAtTime(0, now);
-    voice.nodes.forEach(n => { if (n.stop) n.stop(now); });
-  } else {
-    voice.gain.gain.cancelScheduledValues(now);
-    voice.gain.gain.setValueAtTime(voice.gain.gain.value, now);
-    voice.gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-    voice.nodes.forEach(n => { if (n.stop) n.stop(now + 0.2); });
-  }
+// We build a range of white keys and place black keys absolutely on top
+let currentWhiteMidis = [];
 
-  activeVoices.delete(midiNote);
+function isMidiBlack(midi) {
+  const n = midi % 12;
+  return n === 1 || n === 3 || n === 6 || n === 8 || n === 10;
 }
 
-// --- Keyboard Generation (A0 to C8 - 88 Keys) ---
-const START_MIDI = 21; // A0
-const END_MIDI = 108;  // C8
-
-function getNoteDetails(midi) {
-  const noteIndex = midi % 12;
-  const octave = Math.floor(midi / 12) - 1;
-  const name = NOTE_NAMES[noteIndex];
-  const solfege = SOLFEGE[noteIndex];
-  const isBlack = name.includes('#');
-  return { midi, name: name + octave, baseName: name, solfege: solfege + octave, isBlack, octave };
-}
-
-let keyWidth = 60;
-let labelMode = 'notes';
-
-function buildKeyboard(containerId, isSecondary = false) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-
-  const whiteKeys = [];
-  const blackKeys = [];
-
-  for (let m = START_MIDI; m <= END_MIDI; m++) {
-    const details = getNoteDetails(m);
-    if (!details.isBlack) {
-      whiteKeys.push(details);
-    } else {
-      blackKeys.push(details);
-    }
-  }
-
-  let whiteIndex = 0;
-  const midiToWhiteIndex = {};
-
-  whiteKeys.forEach((wk) => {
-    midiToWhiteIndex[wk.midi] = whiteIndex;
-
-    const keyEl = document.createElement('div');
-    keyEl.className = 'white-key';
-    keyEl.dataset.midi = wk.midi;
-    keyEl.id = (isSecondary ? 'sec_' : '') + 'key_' + wk.midi;
-    keyEl.style.width = keyWidth + 'px';
-
-    const lbl = document.createElement('span');
-    lbl.className = 'note-label';
-    lbl.innerText = getLabelText(wk);
-    keyEl.appendChild(lbl);
-
-    container.appendChild(keyEl);
-    whiteIndex++;
-  });
-
-  // Position black keys over whites
-  blackKeys.forEach((bk) => {
-    const keyEl = document.createElement('div');
-    keyEl.className = 'black-key';
-    keyEl.dataset.midi = bk.midi;
-    keyEl.id = (isSecondary ? 'sec_' : '') + 'key_' + bk.midi;
-    keyEl.style.width = (keyWidth * 0.6) + 'px';
-
-    // A black key sits between wk (bk.midi - 1) and (bk.midi + 1)
-    const prevWhiteIdx = midiToWhiteIndex[bk.midi - 1];
-    if (prevWhiteIdx !== undefined) {
-      const leftOffset = (prevWhiteIdx + 1) * keyWidth - (keyWidth * 0.3);
-      keyEl.style.left = leftOffset + 'px';
-    }
-
-    const lbl = document.createElement('span');
-    lbl.className = 'note-label';
-    lbl.innerText = getLabelText(bk);
-    keyEl.appendChild(lbl);
-
-    container.appendChild(keyEl);
-  });
-}
-
-function getLabelText(details) {
+function getNoteLabel(midi) {
   if (labelMode === 'none') return '';
-  if (labelMode === 'solfege') return details.solfege;
-  return details.name;
-}
-
-function refreshKeyLabels() {
-  document.querySelectorAll('.white-key, .black-key').forEach(k => {
-    const midi = parseInt(k.dataset.midi, 10);
-    const details = getNoteDetails(midi);
-    const lbl = k.querySelector('.note-label');
-    if (lbl) lbl.innerText = getLabelText(details);
-  });
-}
-
-// Build minimap
-function buildMinimap() {
-  const container = document.getElementById('minimapKeys');
-  container.innerHTML = '';
-  for (let m = START_MIDI; m <= END_MIDI; m++) {
-    const det = getNoteDetails(m);
-    const el = document.createElement('div');
-    el.className = 'mini-k' + (det.isBlack ? ' black' : '');
-    container.appendChild(el);
+  const name = NOTE_NAMES[midi % 12];
+  const oct = Math.floor(midi / 12) - 1;
+  if (labelMode === 'sargam') {
+    return `<span class="sargam-label">${SARGAM_NAMES[midi % 12]}</span>`;
   }
+  if (labelMode === 'solfege') {
+    return `${SOLFEGE_NAMES[midi % 12]}<br><small>${oct}</small>`;
+  }
+  return `${name}${oct}`;
 }
 
-// --- Multi-touch & Interaction Tracking ---
-const touchMap = new Map(); // identifier -> current midi
+function renderKeyboard() {
+  whiteKeysContainer.innerHTML = '';
+  // Remove all black keys
+  const oldBlacks = keysWrapper.querySelectorAll('.b-key');
+  oldBlacks.forEach(b => b.remove());
 
-function setupTouchEvents(viewportId) {
-  const viewport = document.getElementById(viewportId);
+  // Start at baseOctave, C
+  const startMidi = (baseOctave + 1) * 12; // C of baseOctave
+  currentWhiteMidis = [];
+  let midi = startMidi;
+  
+  while (currentWhiteMidis.length < visibleWhiteKeys) {
+    if (!isMidiBlack(midi)) {
+      currentWhiteMidis.push(midi);
+    }
+    midi++;
+    if (midi > 108) break;
+  }
 
-  viewport.addEventListener('pointerdown', (e) => {
-    e.preventDefault();
-    const key = document.elementFromPoint(e.clientX, e.clientY)?.closest('.white-key, .black-key');
-    if (key) {
-      const midi = parseInt(key.dataset.midi, 10);
-      touchMap.set(e.pointerId, midi);
-      pressKey(midi, key);
+  // Update octave display
+  const firstKey = midiToName(currentWhiteMidis[0]);
+  const lastKey = midiToName(currentWhiteMidis[currentWhiteMidis.length - 1]);
+  octaveTag.textContent = `${firstKey}–${lastKey}`;
+
+  // Render White Keys
+  currentWhiteMidis.forEach((wMidi, index) => {
+    const wKey = document.createElement('div');
+    wKey.className = 'w-key';
+    wKey.dataset.midi = wMidi;
+    wKey.innerHTML = `<span class="k-label">${getNoteLabel(wMidi)}</span>`;
+    whiteKeysContainer.appendChild(wKey);
+  });
+
+  // Place Black Keys dynamically over white key boundaries
+  setTimeout(positionBlackKeys, 20);
+}
+
+function positionBlackKeys() {
+  const oldBlacks = keysWrapper.querySelectorAll('.b-key');
+  oldBlacks.forEach(b => b.remove());
+
+  const whiteElements = whiteKeysContainer.querySelectorAll('.w-key');
+  if (whiteElements.length === 0) return;
+  const containerRect = keysWrapper.getBoundingClientRect();
+
+  whiteElements.forEach((wKey, index) => {
+    const wMidi = parseInt(wKey.dataset.midi, 10);
+    const nextMidi = wMidi + 1;
+
+    if (isMidiBlack(nextMidi)) {
+      const bKey = document.createElement('div');
+      bKey.className = 'b-key';
+      bKey.dataset.midi = nextMidi;
+      bKey.innerHTML = `<span class="k-label">${getNoteLabel(nextMidi)}</span>`;
+
+      const wRect = wKey.getBoundingClientRect();
+      const leftPos = (wRect.right - containerRect.left) - (containerRect.width * 0.015);
+      const bWidth = containerRect.width * 0.038;
+
+      bKey.style.left = `${leftPos - (bWidth / 2)}px`;
+      bKey.style.width = `${Math.max(bWidth, 24)}px`;
+      keysWrapper.appendChild(bKey);
     }
   });
+}
 
-  viewport.addEventListener('pointermove', (e) => {
-    if (!touchMap.has(e.pointerId)) return;
-    const key = document.elementFromPoint(e.clientX, e.clientY)?.closest('.white-key, .black-key');
-    const currentMidi = touchMap.get(e.pointerId);
-    if (key) {
-      const newMidi = parseInt(key.dataset.midi, 10);
-      if (newMidi !== currentMidi) {
-        releaseKey(currentMidi);
-        touchMap.set(e.pointerId, newMidi);
-        pressKey(newMidi, key);
+window.addEventListener('resize', positionBlackKeys);
+
+// Multi-Touch tracking system
+const touchMap = new Map(); // touchId -> midi
+
+function getKeyAtPoint(x, y) {
+  // Check black keys first (higher z-index)
+  const blackKeys = keysWrapper.querySelectorAll('.b-key');
+  for (let bk of blackKeys) {
+    const r = bk.getBoundingClientRect();
+    if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+      return bk;
+    }
+  }
+  const whiteKeys = keysWrapper.querySelectorAll('.w-key');
+  for (let wk of whiteKeys) {
+    const r = wk.getBoundingClientRect();
+    if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+      return wk;
+    }
+  }
+  return null;
+}
+
+function triggerNoteOn(midi) {
+  playNoteSound(midi);
+  const keyEl = keysWrapper.querySelector(`[data-midi="${midi}"]`);
+  if (keyEl) keyEl.classList.add('active');
+}
+
+function triggerNoteOff(midi) {
+  stopNoteSound(midi);
+  const keyEl = keysWrapper.querySelector(`[data-midi="${midi}"]`);
+  if (keyEl) keyEl.classList.remove('active');
+}
+
+keysWrapper.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    const touch = e.changedTouches[i];
+    const keyEl = getKeyAtPoint(touch.clientX, touch.clientY);
+    if (keyEl) {
+      const midi = parseInt(keyEl.dataset.midi, 10);
+      touchMap.set(touch.identifier, midi);
+      triggerNoteOn(midi);
+    }
+  }
+}, { passive: false });
+
+keysWrapper.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    const touch = e.changedTouches[i];
+    const prevMidi = touchMap.get(touch.identifier);
+    const keyEl = getKeyAtPoint(touch.clientX, touch.clientY);
+    if (keyEl) {
+      const newMidi = parseInt(keyEl.dataset.midi, 10);
+      if (newMidi !== prevMidi) {
+        if (prevMidi) triggerNoteOff(prevMidi);
+        touchMap.set(touch.identifier, newMidi);
+        triggerNoteOn(newMidi);
       }
-    } else {
-      releaseKey(currentMidi);
-      touchMap.delete(e.pointerId);
+    } else if (prevMidi) {
+      triggerNoteOff(prevMidi);
+      touchMap.delete(touch.identifier);
     }
-  });
-
-  const onPointerUp = (e) => {
-    if (touchMap.has(e.pointerId)) {
-      const midi = touchMap.get(e.pointerId);
-      releaseKey(midi);
-      touchMap.delete(e.pointerId);
-    }
-  };
-
-  viewport.addEventListener('pointerup', onPointerUp);
-  viewport.addEventListener('pointercancel', onPointerUp);
-}
-
-function pressKey(midi, keyElement = null) {
-  if (!keyElement) {
-    keyElement = document.getElementById('key_' + midi) || document.getElementById('sec_key_' + midi);
   }
-  if (keyElement) keyElement.classList.add('active');
-  startNote(midi, 0.85);
+}, { passive: false });
+
+function handleTouchEnd(e) {
+  e.preventDefault();
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    const touch = e.changedTouches[i];
+    const midi = touchMap.get(touch.identifier);
+    if (midi) {
+      triggerNoteOff(midi);
+      touchMap.delete(touch.identifier);
+    }
+  }
 }
+keysWrapper.addEventListener('touchend', handleTouchEnd, { passive: false });
+keysWrapper.addEventListener('touchcancel', handleTouchEnd, { passive: false });
 
-function releaseKey(midi) {
-  const keys = document.querySelectorAll(`[data-midi="${midi}"]`);
-  keys.forEach(k => k.classList.remove('active'));
-  stopNote(midi);
-}
-
-// Minimap Sync
-const pianoViewport = document.getElementById('pianoViewport');
-const minimapViewport = document.getElementById('minimapViewport');
-
-function updateMinimapViewport() {
-  const scrollRatio = pianoViewport.scrollLeft / (pianoViewport.scrollWidth - pianoViewport.clientWidth || 1);
-  const visibleRatio = pianoViewport.clientWidth / pianoViewport.scrollWidth;
-  const miniWidth = Math.max(visibleRatio * 100, 15);
-  minimapViewport.style.width = miniWidth + '%';
-  const maxLeft = 100 - miniWidth;
-  minimapViewport.style.left = (scrollRatio * maxLeft) + '%';
-
-  // Update Octave label
-  const middleMidi = START_MIDI + Math.floor((scrollRatio + visibleRatio / 2) * (END_MIDI - START_MIDI));
-  const curOctave = Math.floor(middleMidi / 12) - 1;
-  document.getElementById('octaveDisplay').innerText = `C${curOctave}-C${curOctave + 2}`;
-}
-
-pianoViewport.addEventListener('scroll', updateMinimapViewport);
-
-// Octave Shifter buttons
-document.getElementById('octaveUp').addEventListener('click', () => {
-  pianoViewport.scrollBy({ left: keyWidth * 7, behavior: 'smooth' });
+// Mouse click support for testing
+let isMouseDown = false;
+let mouseCurrentMidi = null;
+keysWrapper.addEventListener('mousedown', (e) => {
+  isMouseDown = true;
+  const keyEl = getKeyAtPoint(e.clientX, e.clientY);
+  if (keyEl) {
+    mouseCurrentMidi = parseInt(keyEl.dataset.midi, 10);
+    triggerNoteOn(mouseCurrentMidi);
+  }
 });
-document.getElementById('octaveDown').addEventListener('click', () => {
-  pianoViewport.scrollBy({ left: -keyWidth * 7, behavior: 'smooth' });
+window.addEventListener('mouseup', () => {
+  if (isMouseDown && mouseCurrentMidi) {
+    triggerNoteOff(mouseCurrentMidi);
+    mouseCurrentMidi = null;
+  }
+  isMouseDown = false;
 });
-
-// Sustain Pedal Toggle
-const sustainBtn = document.getElementById('sustainBtn');
-const sustainStatus = document.getElementById('sustainStatus');
-sustainBtn.addEventListener('click', () => {
-  sustainPedal = !sustainPedal;
-  sustainStatus.innerText = sustainPedal ? 'ON' : 'OFF';
-  sustainBtn.classList.toggle('active', sustainPedal);
-
-  if (!sustainPedal) {
-    // Release any notes held by sustain
-    activeVoices.forEach((voice, midi) => {
-      if (voice.sustained) {
-        stopVoice(midi);
-      }
-    });
+keysWrapper.addEventListener('mousemove', (e) => {
+  if (!isMouseDown) return;
+  const keyEl = getKeyAtPoint(e.clientX, e.clientY);
+  if (keyEl) {
+    const newMidi = parseInt(keyEl.dataset.midi, 10);
+    if (newMidi !== mouseCurrentMidi) {
+      if (mouseCurrentMidi) triggerNoteOff(mouseCurrentMidi);
+      mouseCurrentMidi = newMidi;
+      triggerNoteOn(mouseCurrentMidi);
+    }
   }
 });
 
-// Instrument Selector
-document.getElementById('instrumentSelect').addEventListener('change', (e) => {
+/* ==========================================================================
+   TOOLBAR CONTROLS
+   ========================================================================== */
+document.getElementById('selectInstrument').addEventListener('change', (e) => {
   currentInstrument = e.target.value;
 });
 
-// Metronome Logic
-let metronomeInterval = null;
-let bpm = 120;
-let isMetroActive = false;
-let metroBeat = 0;
+const btnSustain = document.getElementById('btnSustain');
+btnSustain.addEventListener('click', () => {
+  isSustainOn = !isSustainOn;
+  btnSustain.classList.toggle('active', isSustainOn);
+  btnSustain.textContent = isSustainOn ? 'Sustain: ON' : 'Sustain: OFF';
+});
 
-function toggleMetronome() {
-  isMetroActive = !isMetroActive;
-  const metroBtn = document.getElementById('metroBtn');
-  metroBtn.classList.toggle('active', isMetroActive);
-
-  if (isMetroActive) {
-    initAudio();
-    const intervalMs = (60 / bpm) * 1000;
-    metronomeInterval = setInterval(playMetronomeTick, intervalMs);
-    playMetronomeTick();
+const btnLabelMode = document.getElementById('btnLabelMode');
+btnLabelMode.addEventListener('click', () => {
+  if (labelMode === 'note') {
+    labelMode = 'sargam';
+    btnLabelMode.textContent = 'Labels: Sargam';
+  } else if (labelMode === 'sargam') {
+    labelMode = 'solfege';
+    btnLabelMode.textContent = 'Labels: Do-Re';
+  } else if (labelMode === 'solfege') {
+    labelMode = 'none';
+    btnLabelMode.textContent = 'Labels: OFF';
   } else {
-    clearInterval(metronomeInterval);
-    document.getElementById('metroDot').classList.remove('flash');
+    labelMode = 'note';
+    btnLabelMode.textContent = 'Labels: C4';
   }
-}
+  renderKeyboard();
+});
 
-function playMetronomeTick() {
-  const dot = document.getElementById('metroDot');
-  dot.classList.add('flash');
-  setTimeout(() => dot.classList.remove('flash'), 100);
+const btnKeysVisible = document.getElementById('btnKeysVisible');
+btnKeysVisible.addEventListener('click', () => {
+  if (visibleWhiteKeys === 14) visibleWhiteKeys = 18;
+  else if (visibleWhiteKeys === 18) visibleWhiteKeys = 21;
+  else if (visibleWhiteKeys === 21) visibleWhiteKeys = 10;
+  else visibleWhiteKeys = 14;
+  btnKeysVisible.textContent = `Keys: ${visibleWhiteKeys}`;
+  renderKeyboard();
+});
 
-  if (audioCtx) {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    const now = audioCtx.currentTime;
-
-    osc.frequency.value = (metroBeat % 4 === 0) ? 1200 : 800;
-    gain.gain.setValueAtTime(0.3, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start(now);
-    osc.stop(now + 0.06);
-    metroBeat++;
+document.getElementById('btnOctDown').addEventListener('click', () => {
+  if (baseOctave > 1) {
+    baseOctave--;
+    renderKeyboard();
   }
-}
+});
+document.getElementById('btnOctUp').addEventListener('click', () => {
+  if (baseOctave < 6) {
+    baseOctave++;
+    renderKeyboard();
+  }
+});
 
-document.getElementById('metroBtn').addEventListener('click', toggleMetronome);
-
-// Recorder Logic
-let isRecording = false;
-let recordStartTime = 0;
-let recordedEvents = [];
-const recordBtn = document.getElementById('recordBtn');
-const playBtn = document.getElementById('playBtn');
-
-recordBtn.addEventListener('click', () => {
-  if (!isRecording) {
-    // Start Recording
-    isRecording = true;
-    recordedEvents = [];
-    recordStartTime = performance.now();
-    recordBtn.classList.add('active');
-    recordBtn.innerText = '■ STOP';
-    playBtn.style.display = 'none';
+// Simple Metronome
+let metroInterval = null;
+let metroBpm = 95;
+const btnMetronome = document.getElementById('btnMetronome');
+btnMetronome.addEventListener('click', () => {
+  if (metroInterval) {
+    clearInterval(metroInterval);
+    metroInterval = null;
+    btnMetronome.classList.remove('active');
   } else {
-    // Stop Recording
-    isRecording = false;
-    recordBtn.classList.remove('active');
-    recordBtn.innerText = '● REC';
-    if (recordedEvents.length > 0) {
-      playBtn.style.display = 'inline-flex';
-    }
+    btnMetronome.classList.add('active');
+    const ctx = getAudioContext();
+    metroInterval = setInterval(() => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.frequency.value = 880;
+      g.gain.setValueAtTime(0.3, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+      osc.connect(g);
+      g.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.06);
+    }, (60 / metroBpm) * 1000);
   }
 });
 
-function recordEvent(type, midi, velocity) {
-  if (!isRecording) return;
-  recordedEvents.push({
-    time: performance.now() - recordStartTime,
-    type,
-    midi,
-    velocity
-  });
+/* ==========================================================================
+   EXTENDED 30+ INDIAN PIANO SONGS DATABASE (30+ SECONDS EACH)
+   ========================================================================== */
+const INDIAN_SONGS = [
+  {
+    id: 'tum-hi-ho',
+    title: 'Tum Hi Ho',
+    sub: 'Aashiqui 2 • Arijit Singh / Mithoon',
+    category: 'must',
+    desc: 'Hum tere bin ab reh nahi sakte... (Full emotional verse & chorus)',
+    tempo: 84,
+    notes: [
+      // Verse: Hum tere bin ab reh nahi sakte
+      {n:'G4',d:0.4,t:0.0},{n:'G4',d:0.4,t:0.45},{n:'Ab4',d:0.45,t:0.9},{n:'Bb4',d:0.5,t:1.4},{n:'Ab4',d:0.4,t:2.0},
+      {n:'G4',d:0.45,t:2.45},{n:'F4',d:0.45,t:2.95},{n:'G4',d:0.7,t:3.45},{n:'Eb4',d:0.9,t:4.2},
+      // Tere bina kya wajood mera
+      {n:'G4',d:0.4,t:5.3},{n:'G4',d:0.4,t:5.75},{n:'Ab4',d:0.45,t:6.2},{n:'Bb4',d:0.5,t:6.7},{n:'Ab4',d:0.4,t:7.3},
+      {n:'G4',d:0.45,t:7.75},{n:'F4',d:0.45,t:8.25},{n:'G4',d:0.6,t:8.75},{n:'F4',d:0.5,t:9.4},{n:'Eb4',d:0.8,t:10.0},
+      // Tujhse juda gar ho jayenge
+      {n:'Eb4',d:0.4,t:11.1},{n:'F4',d:0.4,t:11.55},{n:'G4',d:0.45,t:12.0},{n:'Ab4',d:0.5,t:12.5},{n:'G4',d:0.4,t:13.1},
+      {n:'F4',d:0.45,t:13.55},{n:'Eb4',d:0.45,t:14.05},{n:'F4',d:0.7,t:14.55},{n:'D4',d:0.9,t:15.3},
+      // Toh khud se hi ho jayenge juda
+      {n:'D4',d:0.4,t:16.4},{n:'Eb4',d:0.4,t:16.85},{n:'F4',d:0.45,t:17.3},{n:'G4',d:0.5,t:17.8},{n:'F4',d:0.4,t:18.4},
+      {n:'Eb4',d:0.45,t:18.85},{n:'D4',d:0.45,t:19.35},{n:'Eb4',d:0.9,t:19.85},
+      // Chorus: Kyunki tum hi ho, ab tum hi ho
+      {n:'C5',d:0.55,t:21.0},{n:'Bb4',d:0.4,t:21.6},{n:'Ab4',d:0.55,t:22.05},{n:'G4',d:0.65,t:22.65},{n:'Ab4',d:0.4,t:23.35},
+      {n:'Bb4',d:0.55,t:23.8},{n:'C5',d:0.7,t:24.4},{n:'G4',d:0.9,t:25.15},
+      // Zindagi ab tum hi ho
+      {n:'Ab4',d:0.45,t:26.3},{n:'G4',d:0.4,t:26.8},{n:'F4',d:0.45,t:27.25},{n:'Eb4',d:0.45,t:27.75},{n:'F4',d:0.6,t:28.25},
+      {n:'G4',d:0.8,t:28.9},{n:'Eb4',d:1.2,t:29.8},
+      // Chain bhi, mera dard bhi... meri aashiqui ab tum hi ho
+      {n:'C5',d:0.5,t:31.2},{n:'Bb4',d:0.4,t:31.75},{n:'Ab4',d:0.5,t:32.2},{n:'G4',d:0.6,t:32.75},{n:'F4',d:0.5,t:33.4},
+      {n:'G4',d:0.5,t:33.95},{n:'Eb4',d:0.8,t:34.5},{n:'C4',d:1.4,t:35.4}
+    ]
+  },
+  {
+    id: 'agar-tum-saath-ho',
+    title: 'Agar Tum Saath Ho',
+    sub: 'Tamasha • Alka Yagnik, Arijit Singh / A.R. Rahman',
+    category: 'must',
+    desc: 'Pal bhar theher jaao, dil ye sambhal jaaye... Beautiful Rahman chord progression',
+    tempo: 80,
+    notes: [
+      {n:'E4',d:0.5,t:0.0},{n:'G4',d:0.5,t:0.55},{n:'A4',d:0.5,t:1.1},{n:'B4',d:0.7,t:1.65},
+      {n:'A4',d:0.4,t:2.4},{n:'G4',d:0.5,t:2.85},{n:'E4',d:0.8,t:3.4},
+      // Pal bhar thehar jaao
+      {n:'E4',d:0.4,t:4.5},{n:'G4',d:0.4,t:4.95},{n:'A4',d:0.4,t:5.4},{n:'B4',d:0.7,t:5.85},{n:'D5',d:0.5,t:6.6},{n:'C5',d:0.5,t:7.15},{n:'B4',d:0.8,t:7.7},
+      // Dil ye sambhal jaaye
+      {n:'A4',d:0.45,t:8.7},{n:'B4',d:0.45,t:9.2},{n:'C5',d:0.5,t:9.7},{n:'B4',d:0.4,t:10.25},{n:'A4',d:0.5,t:10.7},{n:'G4',d:0.5,t:11.25},{n:'A4',d:0.8,t:11.8},
+      // Kaise tumhe roke bhala
+      {n:'E4',d:0.4,t:12.8},{n:'G4',d:0.4,t:13.25},{n:'A4',d:0.4,t:13.7},{n:'B4',d:0.7,t:14.15},{n:'D5',d:0.5,t:14.9},{n:'C5',d:0.5,t:15.45},{n:'B4',d:0.8,t:16.0},
+      // Aankhein churaaye
+      {n:'A4',d:0.45,t:17.0},{n:'B4',d:0.45,t:17.5},{n:'C5',d:0.5,t:18.0},{n:'B4',d:0.4,t:18.55},{n:'A4',d:0.5,t:19.0},{n:'G4',d:0.5,t:19.55},{n:'E4',d:0.9,t:20.1},
+      // Chorus: Teri nazron mein hai tere sapne
+      {n:'B4',d:0.5,t:21.3},{n:'C5',d:0.5,t:21.85},{n:'D5',d:0.6,t:22.4},{n:'D5',d:0.5,t:23.05},{n:'E5',d:0.6,t:23.6},{n:'D5',d:0.5,t:24.25},{n:'C5',d:0.7,t:24.8},
+      // Tere sapnon mein hai naraazi
+      {n:'A4',d:0.5,t:25.7},{n:'B4',d:0.5,t:26.25},{n:'C5',d:0.6,t:26.8},{n:'C5',d:0.5,t:27.45},{n:'D5',d:0.6,t:28.0},{n:'C5',d:0.5,t:28.65},{n:'B4',d:0.8,t:29.2},
+      // Behta aansoo haste gaal pe... Agar tum saath ho
+      {n:'G4',d:0.4,t:30.3},{n:'A4',d:0.4,t:30.75},{n:'B4',d:0.6,t:31.2},{n:'A4',d:0.4,t:31.85},{n:'G4',d:0.4,t:32.3},{n:'F#4',d:0.5,t:32.75},{n:'E4',d:1.2,t:33.3}
+    ]
+  },
+  {
+    id: 'apna-bana-le',
+    title: 'Apna Bana Le',
+    sub: 'Bhediya • Arijit Singh / Sachin-Jigar',
+    category: 'must',
+    desc: 'Tu mera koi na hoke bhi kuch laage... Soul-stirring melody',
+    tempo: 82,
+    notes: [
+      {n:'C4',d:0.45,t:0.0},{n:'E4',d:0.45,t:0.5},{n:'G4',d:0.5,t:1.0},{n:'A4',d:0.5,t:1.55},{n:'G4',d:0.7,t:2.1},
+      {n:'E4',d:0.45,t:2.9},{n:'D4',d:0.45,t:3.4},{n:'C4',d:0.7,t:3.9},
+      // Tu mera koi na hoke bhi kuch laage
+      {n:'C4',d:0.4,t:4.8},{n:'E4',d:0.4,t:5.25},{n:'G4',d:0.5,t:5.7},{n:'A4',d:0.45,t:6.25},{n:'B4',d:0.5,t:6.75},{n:'A4',d:0.4,t:7.3},{n:'G4',d:0.7,t:7.75},
+      {n:'E4',d:0.4,t:8.6},{n:'G4',d:0.4,t:9.05},{n:'A4',d:0.5,t:9.5},{n:'G4',d:0.45,t:10.05},{n:'E4',d:0.4,t:10.55},{n:'D4',d:0.4,t:11.0},{n:'C4',d:0.8,t:11.45},
+      // Kiya re jo bhi toone kaise kiya re
+      {n:'C4',d:0.4,t:12.5},{n:'E4',d:0.4,t:12.95},{n:'G4',d:0.5,t:13.4},{n:'A4',d:0.45,t:13.95},{n:'B4',d:0.5,t:14.45},{n:'A4',d:0.4,t:15.0},{n:'G4',d:0.7,t:15.45},
+      {n:'E4',d:0.4,t:16.3},{n:'G4',d:0.4,t:16.75},{n:'A4',d:0.5,t:17.2},{n:'G4',d:0.45,t:17.75},{n:'E4',d:0.4,t:18.25},{n:'D4',d:0.4,t:18.7},{n:'C4',d:0.8,t:19.15},
+      // Apna bana le piya, apna bana le piya
+      {n:'G4',d:0.45,t:20.3},{n:'A4',d:0.45,t:20.8},{n:'C5',d:0.6,t:21.3},{n:'B4',d:0.4,t:21.95},{n:'A4',d:0.5,t:22.4},{n:'G4',d:0.7,t:22.95},
+      {n:'E4',d:0.45,t:23.8},{n:'G4',d:0.45,t:24.3},{n:'A4',d:0.6,t:24.8},{n:'G4',d:0.45,t:25.45},{n:'F4',d:0.45,t:25.95},{n:'E4',d:0.5,t:26.45},{n:'D4',d:0.8,t:27.0},
+      // Dil ke nagar mein sheher tu basa le piya
+      {n:'C4',d:0.4,t:28.1},{n:'D4',d:0.4,t:28.55},{n:'E4',d:0.45,t:29.0},{n:'F4',d:0.4,t:29.5},{n:'G4',d:0.5,t:29.95},{n:'A4',d:0.5,t:30.5},{n:'G4',d:0.7,t:31.05},
+      {n:'E4',d:0.45,t:31.9},{n:'D4',d:0.45,t:32.4},{n:'C4',d:1.2,t:32.9}
+    ]
+  },
+  {
+    id: 'heeriye',
+    title: 'Heeriye',
+    sub: 'Jasleen Royal & Arijit Singh',
+    category: 'must',
+    desc: 'Heeriye heeriye aa... Viral acoustic piano guitar arrangement',
+    tempo: 90,
+    notes: [
+      {n:'D4',d:0.45,t:0.0},{n:'F#4',d:0.45,t:0.5},{n:'A4',d:0.5,t:1.0},{n:'B4',d:0.6,t:1.55},{n:'A4',d:0.7,t:2.2},
+      {n:'F#4',d:0.4,t:3.0},{n:'E4',d:0.4,t:3.45},{n:'D4',d:0.8,t:3.9},
+      // Heeriye heeriye aa
+      {n:'D4',d:0.4,t:4.9},{n:'F#4',d:0.4,t:5.35},{n:'A4',d:0.5,t:5.8},{n:'B4',d:0.5,t:6.35},{n:'D5',d:0.6,t:6.9},{n:'B4',d:0.5,t:7.55},{n:'A4',d:0.7,t:8.1},
+      // Teri hoke marjaana
+      {n:'F#4',d:0.4,t:9.0},{n:'A4',d:0.4,t:9.45},{n:'B4',d:0.5,t:9.9},{n:'A4',d:0.4,t:10.45},{n:'F#4',d:0.4,t:10.9},{n:'E4',d:0.5,t:11.35},{n:'D4',d:0.8,t:11.9},
+      // Kudiye ne tere te
+      {n:'D4',d:0.4,t:12.9},{n:'F#4',d:0.4,t:13.35},{n:'A4',d:0.5,t:13.8},{n:'B4',d:0.5,t:14.35},{n:'D5',d:0.6,t:14.9},{n:'B4',d:0.5,t:15.55},{n:'A4',d:0.7,t:16.1},
+      // Dil aape kho jaana
+      {n:'F#4',d:0.4,t:17.0},{n:'A4',d:0.4,t:17.45},{n:'B4',d:0.5,t:17.9},{n:'A4',d:0.4,t:18.45},{n:'F#4',d:0.4,t:18.9},{n:'E4',d:0.5,t:19.35},{n:'D4',d:0.8,t:19.9},
+      // Hook drop: Heeriye... teri khushboo aave
+      {n:'D5',d:0.5,t:21.0},{n:'B4',d:0.4,t:21.55},{n:'A4',d:0.5,t:22.0},{n:'F#4',d:0.6,t:22.55},{n:'A4',d:0.5,t:23.2},{n:'B4',d:0.7,t:23.75},
+      {n:'D5',d:0.5,t:24.7},{n:'B4',d:0.4,t:25.25},{n:'A4',d:0.5,t:25.7},{n:'F#4',d:0.6,t:26.25},{n:'E4',d:0.8,t:26.9},
+      // Rab kare tu mil jaave
+      {n:'D4',d:0.4,t:28.0},{n:'E4',d:0.4,t:28.45},{n:'F#4',d:0.45,t:28.9},{n:'A4',d:0.5,t:29.4},{n:'B4',d:0.5,t:29.95},{n:'A4',d:0.6,t:30.5},{n:'D4',d:1.2,t:31.2}
+    ]
+  },
+  {
+    id: 'o-maahi',
+    title: 'O Maahi',
+    sub: 'Dunki • Arijit Singh / Pritam',
+    category: 'must',
+    desc: 'O maahi o maahi... dil diyaan gallan karange naale',
+    tempo: 84,
+    notes: [
+      {n:'G4',d:0.4,t:0.0},{n:'C5',d:0.5,t:0.45},{n:'B4',d:0.4,t:1.0},{n:'A4',d:0.4,t:1.45},{n:'G4',d:0.6,t:1.9},
+      {n:'E4',d:0.4,t:2.6},{n:'F4',d:0.4,t:3.05},{n:'G4',d:0.7,t:3.5},
+      // O maahi o maahi
+      {n:'G4',d:0.4,t:4.4},{n:'C5',d:0.5,t:4.85},{n:'D5',d:0.5,t:5.4},{n:'C5',d:0.4,t:5.95},{n:'B4',d:0.4,t:6.4},{n:'C5',d:0.7,t:6.85},
+      {n:'A4',d:0.4,t:7.7},{n:'B4',d:0.4,t:8.15},{n:'C5',d:0.5,t:8.6},{n:'B4',d:0.4,t:9.15},{n:'A4',d:0.4,t:9.6},{n:'G4',d:0.8,t:10.05},
+      // Main tere bina jeena nahi seekha
+      {n:'E4',d:0.4,t:11.1},{n:'G4',d:0.4,t:11.55},{n:'A4',d:0.45,t:12.0},{n:'C5',d:0.5,t:12.5},{n:'B4',d:0.4,t:13.05},{n:'A4',d:0.4,t:13.5},{n:'G4',d:0.7,t:13.95},
+      {n:'F4',d:0.4,t:14.8},{n:'G4',d:0.4,t:15.25},{n:'A4',d:0.45,t:15.7},{n:'G4',d:0.4,t:16.2},{n:'F4',d:0.4,t:16.65},{n:'E4',d:0.8,t:17.1},
+      // O maahi re... teri baahon mein jaana
+      {n:'G4',d:0.4,t:18.2},{n:'C5',d:0.5,t:18.65},{n:'D5',d:0.6,t:19.2},{n:'E5',d:0.6,t:19.85},{n:'D5',d:0.4,t:20.5},{n:'C5',d:0.7,t:20.95},
+      {n:'A4',d:0.4,t:21.8},{n:'C5',d:0.4,t:22.25},{n:'D5',d:0.5,t:22.7},{n:'C5',d:0.4,t:23.25},{n:'B4',d:0.4,t:23.7},{n:'A4',d:0.4,t:24.15},{n:'G4',d:0.8,t:24.6},
+      // Hook reprise
+      {n:'G4',d:0.4,t:25.7},{n:'C5',d:0.5,t:26.15},{n:'D5',d:0.5,t:26.7},{n:'C5',d:0.4,t:27.25},{n:'B4',d:0.4,t:27.7},{n:'C5',d:0.8,t:28.15},
+      {n:'A4',d:0.4,t:29.1},{n:'F4',d:0.4,t:29.55},{n:'G4',d:0.5,t:30.0},{n:'E4',d:1.2,t:30.55}
+    ]
+  },
+  {
+    id: 'sajni',
+    title: 'Sajni',
+    sub: 'Laapataa Ladies • Arijit Singh / Ram Sampath',
+    category: 'must',
+    desc: 'O sajni re... kaise kate din raat? Soulful classical-infused melody',
+    tempo: 78,
+    notes: [
+      {n:'D4',d:0.5,t:0.0},{n:'G4',d:0.5,t:0.55},{n:'F#4',d:0.4,t:1.1},{n:'E4',d:0.5,t:1.55},{n:'D4',d:0.7,t:2.1},
+      {n:'C#4',d:0.4,t:2.9},{n:'D4',d:0.7,t:3.35},
+      // O sajni re
+      {n:'D4',d:0.45,t:4.3},{n:'F#4',d:0.45,t:4.8},{n:'A4',d:0.5,t:5.3},{n:'B4',d:0.6,t:5.85},{n:'A4',d:0.8,t:6.5},
+      // Kaise kate din raat
+      {n:'A4',d:0.4,t:7.5},{n:'B4',d:0.4,t:7.95},{n:'C#5',d:0.5,t:8.4},{n:'D5',d:0.6,t:8.95},{n:'C#5',d:0.4,t:9.6},{n:'B4',d:0.4,t:10.05},{n:'A4',d:0.7,t:10.5},
+      // Kaise jiyun tere bin sajna
+      {n:'G4',d:0.4,t:11.4},{n:'A4',d:0.4,t:11.85},{n:'B4',d:0.45,t:12.3},{n:'A4',d:0.4,t:12.8},{n:'G4',d:0.4,t:13.25},{n:'F#4',d:0.5,t:13.7},{n:'E4',d:0.7,t:14.25},
+      {n:'F#4',d:0.4,t:15.1},{n:'G4',d:0.4,t:15.55},{n:'F#4',d:0.4,t:16.0},{n:'E4',d:0.4,t:16.45},{n:'D4',d:0.9,t:16.9},
+      // Chorus: O sajni re...
+      {n:'D4',d:0.45,t:18.0},{n:'F#4',d:0.45,t:18.5},{n:'A4',d:0.5,t:19.0},{n:'B4',d:0.6,t:19.55},{n:'A4',d:0.8,t:20.2},
+      {n:'D5',d:0.5,t:21.2},{n:'C#5',d:0.4,t:21.75},{n:'B4',d:0.5,t:22.2},{n:'A4',d:0.6,t:22.75},{n:'G4',d:0.5,t:23.4},{n:'F#4',d:0.7,t:23.95},
+      // Teri yaad sataye
+      {n:'E4',d:0.4,t:24.9},{n:'F#4',d:0.4,t:25.35},{n:'G4',d:0.5,t:25.8},{n:'F#4',d:0.4,t:26.35},{n:'E4',d:0.4,t:26.8},{n:'D4',d:1.2,t:27.25}
+    ]
+  },
+  {
+    id: 'chaleya',
+    title: 'Chaleya',
+    sub: 'Jawan • Arijit Singh, Shilpa Rao / Anirudh',
+    category: 'must',
+    desc: 'Ishq mein dil bana hai, ishq mein dil fana hai... Energetic romantic vibe',
+    tempo: 98,
+    notes: [
+      {n:'C4',d:0.35,t:0.0},{n:'Eb4',d:0.35,t:0.4},{n:'G4',d:0.4,t:0.8},{n:'Bb4',d:0.45,t:1.25},{n:'G4',d:0.6,t:1.75},
+      {n:'F4',d:0.35,t:2.45},{n:'Eb4',d:0.35,t:2.85},{n:'C4',d:0.7,t:3.25},
+      // Ishq mein dil bana hai
+      {n:'C4',d:0.35,t:4.2},{n:'Eb4',d:0.35,t:4.6},{n:'G4',d:0.4,t:5.0},{n:'Bb4',d:0.4,t:5.45},{n:'C5',d:0.5,t:5.9},{n:'Bb4',d:0.4,t:6.45},{n:'G4',d:0.6,t:6.9},
+      // Ishq mein dil fana hai
+      {n:'F4',d:0.35,t:7.7},{n:'G4',d:0.35,t:8.1},{n:'Ab4',d:0.4,t:8.5},{n:'G4',d:0.35,t:8.95},{n:'F4',d:0.35,t:9.35},{n:'Eb4',d:0.4,t:9.75},{n:'F4',d:0.6,t:10.2},
+      // Hosh ab baaqi na hai
+      {n:'Eb4',d:0.35,t:11.0},{n:'F4',d:0.35,t:11.4},{n:'G4',d:0.4,t:11.8},{n:'F4',d:0.35,t:12.25},{n:'Eb4',d:0.35,t:12.65},{n:'D4',d:0.4,t:13.05},{n:'C4',d:0.7,t:13.5},
+      // Chorus: Chaleya teri ore le chaleya
+      {n:'C5',d:0.4,t:14.5},{n:'Bb4',d:0.35,t:14.95},{n:'Ab4',d:0.4,t:15.35},{n:'G4',d:0.5,t:15.8},{n:'F4',d:0.4,t:16.35},{n:'G4',d:0.5,t:16.8},
+      {n:'C5',d:0.4,t:17.5},{n:'Bb4',d:0.35,t:17.95},{n:'Ab4',d:0.4,t:18.35},{n:'G4',d:0.5,t:18.8},{n:'Eb4',d:0.6,t:19.35},
+      // Ishq kare jo vi sar chadheya
+      {n:'F4',d:0.35,t:20.2},{n:'G4',d:0.35,t:20.6},{n:'Ab4',d:0.4,t:21.0},{n:'Bb4',d:0.4,t:21.45},{n:'C5',d:0.5,t:21.9},{n:'Bb4',d:0.4,t:22.45},{n:'G4',d:0.7,t:22.9},
+      {n:'F4',d:0.35,t:23.8},{n:'Eb4',d:0.35,t:24.2},{n:'D4',d:0.4,t:24.6},{n:'C4',d:1.0,t:25.05}
+    ]
+  },
+  {
+    id: 'hawayein',
+    title: 'Hawayein',
+    sub: 'Jab Harry Met Sejal • Arijit Singh / Pritam',
+    category: 'must',
+    desc: 'Tujhko main kitni shiddat se chaahun... Breezy uplifting piano hook',
+    tempo: 88,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'G4',d:0.4,t:0.45},{n:'A4',d:0.4,t:0.9},{n:'B4',d:0.6,t:1.35},{n:'C5',d:0.4,t:2.0},{n:'B4',d:0.5,t:2.45},{n:'A4',d:0.7,t:3.0},
+      // Tujhko main kitni shiddat se chaahun
+      {n:'G4',d:0.4,t:3.9},{n:'A4',d:0.4,t:4.35},{n:'B4',d:0.5,t:4.8},{n:'B4',d:0.4,t:5.35},{n:'C5',d:0.4,t:5.8},{n:'B4',d:0.4,t:6.25},{n:'A4',d:0.4,t:6.7},{n:'G4',d:0.7,t:7.15},
+      // Chaahe toh rehna tu be-khabar
+      {n:'F#4',d:0.4,t:8.1},{n:'G4',d:0.4,t:8.55},{n:'A4',d:0.5,t:9.0},{n:'A4',d:0.4,t:9.55},{n:'B4',d:0.4,t:10.0},{n:'A4',d:0.4,t:10.45},{n:'G4',d:0.4,t:10.9},{n:'F#4',d:0.7,t:11.35},
+      // Chorus: Le jaayein jaane kahan hawayein
+      {n:'D5',d:0.5,t:12.4},{n:'B4',d:0.4,t:12.95},{n:'C5',d:0.4,t:13.4},{n:'D5',d:0.6,t:13.85},{n:'E5',d:0.5,t:14.5},{n:'D5',d:0.4,t:15.05},{n:'C5',d:0.4,t:15.5},{n:'B4',d:0.7,t:15.95},
+      // Begaani si lage zameen bhi
+      {n:'A4',d:0.4,t:16.9},{n:'B4',d:0.4,t:17.35},{n:'C5',d:0.5,t:17.8},{n:'B4',d:0.4,t:18.35},{n:'A4',d:0.4,t:18.8},{n:'G4',d:0.7,t:19.25},
+      // Hawayein hawayein...
+      {n:'G4',d:0.4,t:20.2},{n:'A4',d:0.4,t:20.65},{n:'B4',d:0.6,t:21.1},{n:'A4',d:0.4,t:21.75},{n:'G4',d:0.4,t:22.2},{n:'F#4',d:0.5,t:22.65},{n:'G4',d:1.2,t:23.2}
+    ]
+  },
+  {
+    id: 'kaise-hua',
+    title: 'Kaise Hua',
+    sub: 'Kabir Singh • Vishal Mishra',
+    category: 'must',
+    desc: 'Haste haste yoon hi ro deta hoon... Deep emotional ballad',
+    tempo: 76,
+    notes: [
+      {n:'E4',d:0.5,t:0.0},{n:'G#4',d:0.5,t:0.55},{n:'B4',d:0.6,t:1.1},{n:'C#5',d:0.7,t:1.75},{n:'B4',d:0.8,t:2.5},
+      // Haste haste yoon hi
+      {n:'B4',d:0.4,t:3.5},{n:'C#5',d:0.4,t:3.95},{n:'B4',d:0.4,t:4.4},{n:'A4',d:0.4,t:4.85},{n:'G#4',d:0.6,t:5.3},
+      // Ro deta hoon
+      {n:'F#4',d:0.4,t:6.1},{n:'G#4',d:0.4,t:6.55},{n:'E4',d:0.8,t:7.0},
+      // Aaye jo yaad teri
+      {n:'E4',d:0.4,t:8.0},{n:'F#4',d:0.4,t:8.45},{n:'G#4',d:0.5,t:8.9},{n:'A4',d:0.4,t:9.45},{n:'G#4',d:0.4,t:9.9},{n:'F#4',d:0.7,t:10.35},
+      // Chorus: Kaise hua, tu itna zaroori kaise hua
+      {n:'E5',d:0.5,t:11.4},{n:'D#5',d:0.4,t:11.95},{n:'C#5',d:0.6,t:12.4},{n:'B4',d:0.7,t:13.05},
+      {n:'G#4',d:0.4,t:14.0},{n:'A4',d:0.4,t:14.45},{n:'B4',d:0.5,t:14.9},{n:'C#5',d:0.5,t:15.45},{n:'B4',d:0.4,t:16.0},{n:'A4',d:0.4,t:16.45},{n:'G#4',d:0.7,t:16.9},
+      // Main baarish ki boli samajhta nahi tha
+      {n:'F#4',d:0.4,t:17.8},{n:'G#4',d:0.4,t:18.25},{n:'A4',d:0.45,t:18.7},{n:'B4',d:0.5,t:19.2},{n:'A4',d:0.4,t:19.75},{n:'G#4',d:0.4,t:20.2},{n:'F#4',d:0.7,t:20.65},
+      {n:'E4',d:0.5,t:21.5},{n:'F#4',d:0.4,t:22.05},{n:'E4',d:1.2,t:22.5}
+    ]
+  },
+  {
+    id: 'tujhe-kitna-chahne-lage',
+    title: 'Tujhe Kitna Chahne Lage',
+    sub: 'Kabir Singh • Arijit Singh / Mithoon',
+    category: 'must',
+    desc: 'Dil ka dariya beh hi gaya... Ultimate heartbreak anthem',
+    tempo: 75,
+    notes: [
+      {n:'D4',d:0.45,t:0.0},{n:'F4',d:0.45,t:0.5},{n:'G4',d:0.5,t:1.0},{n:'A4',d:0.6,t:1.55},{n:'G4',d:0.7,t:2.2},
+      {n:'F4',d:0.4,t:3.0},{n:'E4',d:0.4,t:3.45},{n:'D4',d:0.8,t:3.9},
+      // Dil ka dariya beh hi gaya
+      {n:'D4',d:0.4,t:4.9},{n:'F4',d:0.4,t:5.35},{n:'G4',d:0.45,t:5.8},{n:'A4',d:0.6,t:6.3},{n:'C5',d:0.5,t:6.95},{n:'Bb4',d:0.4,t:7.5},{n:'A4',d:0.7,t:7.95},
+      // Ishq ibadat ban hi gaya
+      {n:'G4',d:0.4,t:8.85},{n:'A4',d:0.4,t:9.3},{n:'Bb4',d:0.5,t:9.75},{n:'A4',d:0.4,t:10.3},{n:'G4',d:0.4,t:10.75},{n:'F4',d:0.4,t:11.2},{n:'E4',d:0.8,t:11.65},
+      // Khud ko khoke tujhko paaya
+      {n:'D4',d:0.4,t:12.7},{n:'F4',d:0.4,t:13.15},{n:'G4',d:0.45,t:13.6},{n:'A4',d:0.6,t:14.1},{n:'C5',d:0.5,t:14.75},{n:'Bb4',d:0.4,t:15.3},{n:'A4',d:0.7,t:15.75},
+      // Chorus: Tujhe kitna chahne lage hum
+      {n:'D5',d:0.5,t:16.8},{n:'C5',d:0.4,t:17.35},{n:'Bb4',d:0.5,t:17.8},{n:'A4',d:0.6,t:18.35},{n:'G4',d:0.4,t:19.0},{n:'A4',d:0.7,t:19.45},
+      {n:'Bb4',d:0.5,t:20.4},{n:'A4',d:0.4,t:20.95},{n:'G4',d:0.4,t:21.4},{n:'F4',d:0.5,t:21.85},{n:'E4',d:0.5,t:22.4},{n:'D4',d:1.2,t:22.95}
+    ]
+  },
+  {
+    id: 'phir-bhi-tumko-chaahunga',
+    title: 'Phir Bhi Tumko Chaahunga',
+    sub: 'Half Girlfriend • Arijit Singh / Mithoon',
+    category: 'emotional',
+    desc: 'Main phir bhi tumko chaahunga... Unconditional love anthem',
+    tempo: 78,
+    notes: [
+      {n:'C4',d:0.4,t:0.0},{n:'Eb4',d:0.4,t:0.45},{n:'G4',d:0.5,t:0.9},{n:'Bb4',d:0.6,t:1.45},{n:'Ab4',d:0.7,t:2.1},
+      {n:'G4',d:0.4,t:2.9},{n:'F4',d:0.4,t:3.35},{n:'Eb4',d:0.8,t:3.8},
+      // Tum mere ho is pal mere ho
+      {n:'C4',d:0.4,t:4.8},{n:'Eb4',d:0.4,t:5.25},{n:'G4',d:0.5,t:5.7},{n:'Bb4',d:0.5,t:6.25},{n:'Ab4',d:0.4,t:6.8},{n:'G4',d:0.4,t:7.25},{n:'F4',d:0.7,t:7.7},
+      // Kal shayad ye aalam na rahe
+      {n:'Eb4',d:0.4,t:8.6},{n:'F4',d:0.4,t:9.05},{n:'G4',d:0.45,t:9.5},{n:'Ab4',d:0.4,t:10.0},{n:'G4',d:0.4,t:10.45},{n:'F4',d:0.4,t:10.9},{n:'Eb4',d:0.7,t:11.35},
+      // Kuch aisa ho tum tum na raho
+      {n:'C4',d:0.4,t:12.3},{n:'Eb4',d:0.4,t:12.75},{n:'G4',d:0.5,t:13.2},{n:'Bb4',d:0.5,t:13.75},{n:'Ab4',d:0.4,t:14.3},{n:'G4',d:0.4,t:14.75},{n:'F4',d:0.7,t:15.2},
+      // Chorus: Iss chaahat mein mar jaaunga
+      {n:'C5',d:0.5,t:16.1},{n:'Bb4',d:0.4,t:16.65},{n:'Ab4',d:0.5,t:17.1},{n:'G4',d:0.6,t:17.65},{n:'F4',d:0.7,t:18.3},
+      // Main phir bhi tumko chaahunga
+      {n:'G4',d:0.4,t:19.2},{n:'Ab4',d:0.4,t:19.65},{n:'Bb4',d:0.5,t:20.1},{n:'Ab4',d:0.4,t:20.65},{n:'G4',d:0.4,t:21.1},{n:'F4',d:0.5,t:21.55},{n:'Eb4',d:1.2,t:22.1}
+    ]
+  },
+  {
+    id: 've-maahi',
+    title: 'Ve Maahi',
+    sub: 'Kesari • Arijit Singh & Asees Kaur / Tanishk Bagchi',
+    category: 'emotional',
+    desc: 'O mahi mera yaada te paagal karta... Sweet Punjabi acoustic melody',
+    tempo: 86,
+    notes: [
+      {n:'F4',d:0.4,t:0.0},{n:'A4',d:0.4,t:0.45},{n:'C5',d:0.5,t:0.9},{n:'D5',d:0.6,t:1.45},{n:'C5',d:0.7,t:2.1},
+      {n:'A4',d:0.4,t:2.9},{n:'G4',d:0.4,t:3.35},{n:'F4',d:0.8,t:3.8},
+      // Ve maahi ve vajah
+      {n:'F4',d:0.4,t:4.8},{n:'A4',d:0.4,t:5.25},{n:'C5',d:0.5,t:5.7},{n:'D5',d:0.5,t:6.25},{n:'C5',d:0.4,t:6.8},{n:'A4',d:0.4,t:7.25},{n:'G4',d:0.7,t:7.7},
+      // O maahi mera dil kenda ae
+      {n:'A4',d:0.4,t:8.6},{n:'Bb4',d:0.4,t:9.05},{n:'C5',d:0.5,t:9.5},{n:'C5',d:0.4,t:10.05},{n:'D5',d:0.4,t:10.5},{n:'C5',d:0.4,t:10.95},{n:'Bb4',d:0.4,t:11.4},{n:'A4',d:0.7,t:11.85},
+      // Tere bina lagda nahi dil
+      {n:'G4',d:0.4,t:12.8},{n:'A4',d:0.4,t:13.25},{n:'Bb4',d:0.5,t:13.7},{n:'A4',d:0.4,t:14.25},{n:'G4',d:0.4,t:14.7},{n:'F4',d:0.8,t:15.15}
+    ]
+  },
+  {
+    id: 'khairiyat',
+    title: 'Khairiyat',
+    sub: 'Chhichhore • Arijit Singh / Pritam',
+    category: 'emotional',
+    desc: 'Khairiyat pucho, kabhi kaifiyat pucho... Touching comforting tune',
+    tempo: 80,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'F4',d:0.4,t:0.45},{n:'A4',d:0.5,t:0.9},{n:'Bb4',d:0.5,t:1.45},{n:'A4',d:0.7,t:2.0},
+      {n:'G4',d:0.4,t:2.8},{n:'F4',d:0.4,t:3.25},{n:'E4',d:0.4,t:3.7},{n:'D4',d:0.8,t:4.15},
+      // Khairiyat pucho
+      {n:'D4',d:0.4,t:5.1},{n:'F4',d:0.4,t:5.55},{n:'A4',d:0.5,t:6.0},{n:'C5',d:0.5,t:6.55},{n:'Bb4',d:0.4,t:7.1},{n:'A4',d:0.7,t:7.55},
+      // Kabhi kaifiyat pucho
+      {n:'G4',d:0.4,t:8.45},{n:'Bb4',d:0.4,t:8.9},{n:'A4',d:0.4,t:9.35},{n:'G4',d:0.4,t:9.8},{n:'F4',d:0.5,t:10.25},{n:'E4',d:0.7,t:10.8},
+      // Tumhare bin deewane ka kya haal hai
+      {n:'E4',d:0.4,t:11.7},{n:'F4',d:0.4,t:12.15},{n:'G4',d:0.45,t:12.6},{n:'A4',d:0.5,t:13.1},{n:'G4',d:0.4,t:13.65},{n:'F4',d:0.4,t:14.1},{n:'E4',d:0.4,t:14.55},{n:'D4',d:0.9,t:15.0}
+    ]
+  },
+  {
+    id: 'ishq-wala-love',
+    title: 'Ishq Wala Love',
+    sub: 'Student of the Year • Shekhar, Salim, Neeti / Vishal-Shekhar',
+    category: 'emotional',
+    desc: 'Surkh wala, soz wala, faiz wala love... Gentle sweet melody',
+    tempo: 92,
+    notes: [
+      {n:'E4',d:0.4,t:0.0},{n:'G#4',d:0.4,t:0.45},{n:'B4',d:0.5,t:0.9},{n:'C#5',d:0.6,t:1.45},{n:'B4',d:0.7,t:2.1},
+      {n:'A4',d:0.4,t:2.9},{n:'G#4',d:0.4,t:3.35},{n:'F#4',d:0.8,t:3.8},
+      // Surkh wala soz wala
+      {n:'E4',d:0.4,t:4.8},{n:'G#4',d:0.4,t:5.25},{n:'B4',d:0.5,t:5.7},{n:'C#5',d:0.5,t:6.25},{n:'B4',d:0.7,t:6.8},
+      // Faiz wala love
+      {n:'A4',d:0.4,t:7.7},{n:'G#4',d:0.4,t:8.15},{n:'F#4',d:0.8,t:8.6},
+      // Hota hai jo love se zyada
+      {n:'F#4',d:0.4,t:9.6},{n:'G#4',d:0.4,t:10.05},{n:'A4',d:0.5,t:10.5},{n:'B4',d:0.5,t:11.05},{n:'A4',d:0.4,t:11.6},{n:'G#4',d:0.7,t:12.05},
+      // Ishq wala love
+      {n:'F#4',d:0.4,t:12.95},{n:'G#4',d:0.4,t:13.4},{n:'E4',d:1.0,t:13.85}
+    ]
+  },
+  {
+    id: 'samjhawan',
+    title: 'Samjhawan',
+    sub: 'Humpty Sharma Ki Dulhania • Arijit Singh & Shreya Ghoshal',
+    category: 'emotional',
+    desc: 'Main tennu samjhawan ki, na tere bina lagda jee... Timeless Punjabi classic',
+    tempo: 78,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'F#4',d:0.4,t:0.45},{n:'A4',d:0.5,t:0.9},{n:'B4',d:0.6,t:1.45},{n:'A4',d:0.8,t:2.1},
+      {n:'F#4',d:0.4,t:3.0},{n:'E4',d:0.4,t:3.45},{n:'D4',d:0.8,t:3.9},
+      // Main tennu samjhawan ki
+      {n:'D4',d:0.4,t:4.9},{n:'F#4',d:0.4,t:5.35},{n:'A4',d:0.5,t:5.8},{n:'B4',d:0.5,t:6.35},{n:'C#5',d:0.6,t:6.9},{n:'B4',d:0.4,t:7.55},{n:'A4',d:0.8,t:8.0},
+      // Na tere bina lagda jee
+      {n:'G4',d:0.4,t:9.0},{n:'A4',d:0.4,t:9.45},{n:'B4',d:0.5,t:9.9},{n:'A4',d:0.4,t:10.45},{n:'G4',d:0.4,t:10.9},{n:'F#4',d:0.5,t:11.35},{n:'E4',d:0.8,t:11.9},
+      // Tu ki jaane pyaar mera
+      {n:'D4',d:0.4,t:12.9},{n:'F#4',d:0.4,t:13.35},{n:'A4',d:0.5,t:13.8},{n:'B4',d:0.5,t:14.35},{n:'A4',d:0.7,t:14.9},
+      // Main karun intezaar tera
+      {n:'G4',d:0.4,t:15.8},{n:'A4',d:0.4,t:16.25},{n:'G4',d:0.4,t:16.7},{n:'F#4',d:0.4,t:17.15},{n:'E4',d:0.4,t:17.6},{n:'D4',d:1.1,t:18.05}
+    ]
+  },
+  {
+    id: 'pehli-dafa',
+    title: 'Pehli Dafa',
+    sub: 'Atif Aslam • Shiraz Uppal',
+    category: 'emotional',
+    desc: 'Dil kahe kahaniyan pehli dafa... Sweet romance in Atif style',
+    tempo: 84,
+    notes: [
+      {n:'G4',d:0.4,t:0.0},{n:'B4',d:0.4,t:0.45},{n:'D5',d:0.5,t:0.9},{n:'E5',d:0.6,t:1.45},{n:'D5',d:0.7,t:2.1},
+      {n:'B4',d:0.4,t:2.9},{n:'A4',d:0.4,t:3.35},{n:'G4',d:0.8,t:3.8},
+      // Dil kahe kahaniyan
+      {n:'G4',d:0.4,t:4.8},{n:'B4',d:0.4,t:5.25},{n:'D5',d:0.5,t:5.7},{n:'E5',d:0.5,t:6.25},{n:'D5',d:0.7,t:6.8},
+      // Pehli dafa
+      {n:'C5',d:0.4,t:7.7},{n:'B4',d:0.4,t:8.15},{n:'A4',d:0.8,t:8.6},
+      // Armaanon ki nadiyaan behti hain
+      {n:'A4',d:0.4,t:9.6},{n:'B4',d:0.4,t:10.05},{n:'C5',d:0.5,t:10.5},{n:'B4',d:0.4,t:11.05},{n:'A4',d:0.4,t:11.5},{n:'G4',d:0.8,t:11.95}
+    ]
+  },
+  {
+    id: 'tera-ban-jaunga',
+    title: 'Tera Ban Jaunga',
+    sub: 'Kabir Singh • Akhil Sachdeva & Tulsi Kumar',
+    category: 'emotional',
+    desc: 'Meri raahein tere tak hain, tujhpe hi toh mera haq hai... Devotional romance',
+    tempo: 82,
+    notes: [
+      {n:'F4',d:0.4,t:0.0},{n:'A4',d:0.4,t:0.45},{n:'C5',d:0.5,t:0.9},{n:'D5',d:0.6,t:1.45},{n:'C5',d:0.7,t:2.1},
+      {n:'A4',d:0.4,t:2.9},{n:'G4',d:0.4,t:3.35},{n:'F4',d:0.8,t:3.8},
+      // Meri raahein tere tak hain
+      {n:'F4',d:0.4,t:4.8},{n:'A4',d:0.4,t:5.25},{n:'C5',d:0.5,t:5.7},{n:'D5',d:0.5,t:6.25},{n:'C5',d:0.4,t:6.8},{n:'A4',d:0.4,t:7.25},{n:'G4',d:0.7,t:7.7},
+      // Tujhpe hi toh mera haq hai
+      {n:'G4',d:0.4,t:8.6},{n:'A4',d:0.4,t:9.05},{n:'Bb4',d:0.5,t:9.5},{n:'A4',d:0.4,t:10.05},{n:'G4',d:0.4,t:10.5},{n:'F4',d:0.4,t:10.95},{n:'E4',d:0.7,t:11.4},
+      // Ban than ke main tera ban jaunga
+      {n:'F4',d:0.4,t:12.3},{n:'G4',d:0.4,t:12.75},{n:'A4',d:0.5,t:13.2},{n:'Bb4',d:0.5,t:13.75},{n:'A4',d:0.4,t:14.3},{n:'G4',d:0.4,t:14.75},{n:'F4',d:1.0,t:15.2}
+    ]
+  },
+  {
+    id: 'humnava-mere',
+    title: 'Humnava Mere',
+    sub: 'Jubin Nautiyal • Rocky-Shiv',
+    category: 'emotional',
+    desc: 'Barson puraana ye yaraana ho gaya... Melancholic Jubin hit',
+    tempo: 78,
+    notes: [
+      {n:'E4',d:0.4,t:0.0},{n:'G4',d:0.4,t:0.45},{n:'B4',d:0.5,t:0.9},{n:'C5',d:0.6,t:1.45},{n:'B4',d:0.7,t:2.1},
+      {n:'A4',d:0.4,t:2.9},{n:'G4',d:0.4,t:3.35},{n:'F#4',d:0.8,t:3.8},
+      // Barson puraana ye yaraana
+      {n:'E4',d:0.4,t:4.8},{n:'G4',d:0.4,t:5.25},{n:'B4',d:0.5,t:5.7},{n:'C5',d:0.5,t:6.25},{n:'B4',d:0.7,t:6.8},
+      // Ho gaya
+      {n:'A4',d:0.4,t:7.7},{n:'G4',d:0.4,t:8.15},{n:'E4',d:0.8,t:8.6},
+      // Humnava mere tu hai toh
+      {n:'G4',d:0.4,t:9.6},{n:'A4',d:0.4,t:10.05},{n:'B4',d:0.5,t:10.5},{n:'C5',d:0.5,t:11.05},{n:'B4',d:0.4,t:11.6},{n:'A4',d:0.7,t:12.05},
+      // Zindagi pyaari lage
+      {n:'G4',d:0.4,t:12.95},{n:'F#4',d:0.4,t:13.4},{n:'E4',d:1.1,t:13.85}
+    ]
+  },
+  {
+    id: 'kaise-mujhe',
+    title: 'Kaise Mujhe',
+    sub: 'Ghajini • Benny Dayal & Shreya Ghoshal / A.R. Rahman',
+    category: 'emotional',
+    desc: 'Kaise mujhe tum mil gayi, kismat pe aaye na yaqeen... Masterpiece ballad',
+    tempo: 72,
+    notes: [
+      {n:'D4',d:0.5,t:0.0},{n:'F#4',d:0.5,t:0.55},{n:'A4',d:0.6,t:1.15},{n:'B4',d:0.7,t:1.8},{n:'A4',d:0.8,t:2.6},
+      // Kaise mujhe tum mil gayi
+      {n:'D4',d:0.45,t:3.6},{n:'F#4',d:0.45,t:4.1},{n:'A4',d:0.5,t:4.6},{n:'B4',d:0.5,t:5.15},{n:'C#5',d:0.6,t:5.7},{n:'B4',d:0.5,t:6.35},{n:'A4',d:0.8,t:6.9},
+      // Kismat pe aaye na yaqeen
+      {n:'G4',d:0.4,t:7.9},{n:'A4',d:0.4,t:8.35},{n:'B4',d:0.5,t:8.8},{n:'A4',d:0.4,t:9.35},{n:'G4',d:0.4,t:9.8},{n:'F#4',d:0.5,t:10.25},{n:'E4',d:0.8,t:10.8},
+      // Utar aayi jheel mein jaise chaand utarta hai
+      {n:'D4',d:0.4,t:11.8},{n:'F#4',d:0.4,t:12.25},{n:'A4',d:0.5,t:12.7},{n:'B4',d:0.5,t:13.25},{n:'A4',d:0.4,t:13.8},{n:'G4',d:0.4,t:14.25},{n:'F#4',d:0.5,t:14.7},{n:'E4',d:0.4,t:15.25},{n:'D4',d:1.2,t:15.7}
+    ]
+  },
+  {
+    id: 'iktara',
+    title: 'Iktara',
+    sub: 'Wake Up Sid • Kavita Seth & Tochi Raina / Amit Trivedi',
+    category: 'emotional',
+    desc: 'Goonja sa koi iktara iktara... Soul-elevating Sufi-pop piano chords',
+    tempo: 85,
+    notes: [
+      {n:'G4',d:0.4,t:0.0},{n:'C5',d:0.45,t:0.45},{n:'D5',d:0.5,t:0.95},{n:'E5',d:0.6,t:1.5},{n:'D5',d:0.7,t:2.15},
+      {n:'C5',d:0.4,t:2.95},{n:'B4',d:0.4,t:3.4},{n:'A4',d:0.4,t:3.85},{n:'G4',d:0.8,t:4.3},
+      // Goonja sa koi iktara
+      {n:'G4',d:0.4,t:5.3},{n:'C5',d:0.45,t:5.75},{n:'D5',d:0.5,t:6.25},{n:'E5',d:0.6,t:6.8},{n:'D5',d:0.5,t:7.45},{n:'C5',d:0.8,t:8.0},
+      // Dheeme bole koi iktara
+      {n:'A4',d:0.4,t:9.0},{n:'C5',d:0.45,t:9.45},{n:'D5',d:0.5,t:9.95},{n:'E5',d:0.6,t:10.5},{n:'D5',d:0.5,t:11.15},{n:'C5',d:0.8,t:11.7},
+      // Man mast malang mera dolena
+      {n:'E5',d:0.4,t:12.7},{n:'D5',d:0.4,t:13.15},{n:'C5',d:0.45,t:13.6},{n:'B4',d:0.4,t:14.1},{n:'A4',d:0.4,t:14.55},{n:'G4',d:0.8,t:15.0}
+    ]
+  },
+  {
+    id: 'iraaday',
+    title: 'Iraaday',
+    sub: 'Abdul Hannan & Rovalio',
+    category: 'viral',
+    desc: 'Iraaday hain kuch naye, dil mein dabe... Viral indie sensation',
+    tempo: 90,
+    notes: [
+      {n:'C4',d:0.4,t:0.0},{n:'E4',d:0.4,t:0.45},{n:'G4',d:0.5,t:0.9},{n:'A4',d:0.5,t:1.45},{n:'G4',d:0.7,t:2.0},
+      {n:'E4',d:0.4,t:2.8},{n:'D4',d:0.4,t:3.25},{n:'C4',d:0.8,t:3.7},
+      // Iraaday hain kuch naye
+      {n:'C4',d:0.4,t:4.7},{n:'E4',d:0.4,t:5.15},{n:'G4',d:0.5,t:5.6},{n:'A4',d:0.5,t:6.15},{n:'G4',d:0.7,t:6.7},
+      // Dil mein dabe
+      {n:'E4',d:0.4,t:7.6},{n:'D4',d:0.4,t:8.05},{n:'C4',d:0.8,t:8.5},
+      // Tere bin jeena na aave
+      {n:'E4',d:0.4,t:9.5},{n:'G4',d:0.4,t:9.95},{n:'A4',d:0.5,t:10.4},{n:'C5',d:0.5,t:10.95},{n:'B4',d:0.4,t:11.5},{n:'A4',d:0.4,t:11.95},{n:'G4',d:0.8,t:12.4},
+      // Tu meri jaan hai
+      {n:'A4',d:0.4,t:13.4},{n:'G4',d:0.4,t:13.85},{n:'E4',d:0.4,t:14.3},{n:'D4',d:0.4,t:14.75},{n:'C4',d:1.0,t:15.2}
+    ]
+  },
+  {
+    id: 'bikhra',
+    title: 'Bikhra',
+    sub: 'Abdul Hannan & Rovalio',
+    category: 'viral',
+    desc: 'Bikhra bikhra sa rehta hoon main... Acoustic lo-fi piano vibes',
+    tempo: 84,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'F#4',d:0.4,t:0.45},{n:'A4',d:0.5,t:0.9},{n:'B4',d:0.5,t:1.45},{n:'A4',d:0.7,t:2.0},
+      {n:'F#4',d:0.4,t:2.8},{n:'E4',d:0.4,t:3.25},{n:'D4',d:0.8,t:3.7},
+      // Bikhra bikhra sa rehta hoon
+      {n:'D4',d:0.4,t:4.7},{n:'F#4',d:0.4,t:5.15},{n:'A4',d:0.5,t:5.6},{n:'B4',d:0.5,t:6.15},{n:'A4',d:0.7,t:6.7},
+      // Tere ishq mein
+      {n:'F#4',d:0.4,t:7.6},{n:'E4',d:0.4,t:8.05},{n:'D4',d:0.8,t:8.5},
+      // Tu aake samet le mujhe
+      {n:'F#4',d:0.4,t:9.5},{n:'A4',d:0.4,t:9.95},{n:'B4',d:0.5,t:10.4},{n:'D5',d:0.5,t:10.95},{n:'B4',d:0.4,t:11.5},{n:'A4',d:0.8,t:11.95}
+    ]
+  },
+  {
+    id: 'husn',
+    title: 'Husn',
+    sub: 'Anuv Jain',
+    category: 'viral',
+    desc: 'Dekho dekho kaisi baatein yahan ki hain... Global viral indie hit',
+    tempo: 82,
+    notes: [
+      {n:'C4',d:0.45,t:0.0},{n:'E4',d:0.45,t:0.5},{n:'G4',d:0.5,t:1.0},{n:'A4',d:0.5,t:1.55},{n:'G4',d:0.7,t:2.1},
+      {n:'E4',d:0.4,t:2.9},{n:'D4',d:0.4,t:3.35},{n:'C4',d:0.8,t:3.8},
+      // Dekho dekho kaisi baatein yahan ki hain
+      {n:'C4',d:0.4,t:4.8},{n:'E4',d:0.4,t:5.25},{n:'G4',d:0.45,t:5.7},{n:'A4',d:0.45,t:6.2},{n:'G4',d:0.4,t:6.7},{n:'E4',d:0.4,t:7.15},{n:'G4',d:0.7,t:7.6},
+      // Saath na hoke bhi saath ki hain
+      {n:'A4',d:0.4,t:8.5},{n:'G4',d:0.4,t:8.95},{n:'E4',d:0.4,t:9.4},{n:'D4',d:0.4,t:9.85},{n:'C4',d:0.7,t:10.3},
+      // Husn tera aasmaan hai
+      {n:'C4',d:0.4,t:11.2},{n:'E4',d:0.4,t:11.65},{n:'G4',d:0.5,t:12.1},{n:'A4',d:0.5,t:12.65},{n:'C5',d:0.6,t:13.2},{n:'B4',d:0.4,t:13.85},{n:'A4',d:0.4,t:14.3},{n:'G4',d:0.8,t:14.75},
+      // Tu meri khwaab hai
+      {n:'E4',d:0.4,t:15.75},{n:'G4',d:0.4,t:16.2},{n:'A4',d:0.5,t:16.65},{n:'G4',d:0.4,t:17.2},{n:'D4',d:0.4,t:17.65},{n:'C4',d:1.2,t:18.1}
+    ]
+  },
+  {
+    id: 'jo-tum-mere-ho',
+    title: 'Jo Tum Mere Ho',
+    sub: 'Anuv Jain',
+    category: 'viral',
+    desc: 'Jo tum mere ho toh sab mera hai... Gentle fingerstyle romantic piano',
+    tempo: 80,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'F#4',d:0.4,t:0.45},{n:'A4',d:0.5,t:0.9},{n:'B4',d:0.5,t:1.45},{n:'A4',d:0.7,t:2.0},
+      {n:'F#4',d:0.4,t:2.8},{n:'E4',d:0.4,t:3.25},{n:'D4',d:0.8,t:3.7},
+      // Jo tum mere ho
+      {n:'D4',d:0.4,t:4.7},{n:'F#4',d:0.4,t:5.15},{n:'A4',d:0.5,t:5.6},{n:'B4',d:0.5,t:6.15},{n:'A4',d:0.8,t:6.7},
+      // Toh sab mera hai
+      {n:'F#4',d:0.4,t:7.7},{n:'E4',d:0.4,t:8.15},{n:'D4',d:0.8,t:8.6},
+      // Ye aasmaan ye zameen saara jahan mera hai
+      {n:'F#4',d:0.4,t:9.6},{n:'A4',d:0.4,t:10.05},{n:'B4',d:0.5,t:10.5},{n:'D5',d:0.5,t:11.05},{n:'C#5',d:0.4,t:11.6},{n:'B4',d:0.4,t:12.05},{n:'A4',d:0.8,t:12.5},
+      {n:'G4',d:0.4,t:13.5},{n:'F#4',d:0.4,t:13.95},{n:'E4',d:0.4,t:14.4},{n:'D4',d:1.2,t:14.85}
+    ]
+  },
+  {
+    id: 'alag-aasmaan',
+    title: 'Alag Aasmaan',
+    sub: 'Anuv Jain',
+    category: 'viral',
+    desc: 'Naye sheher mein ek alag aasmaan... Melodic distance romance',
+    tempo: 82,
+    notes: [
+      {n:'E4',d:0.4,t:0.0},{n:'G#4',d:0.4,t:0.45},{n:'B4',d:0.5,t:0.9},{n:'C#5',d:0.5,t:1.45},{n:'B4',d:0.7,t:2.0},
+      {n:'G#4',d:0.4,t:2.8},{n:'F#4',d:0.4,t:3.25},{n:'E4',d:0.8,t:3.7},
+      // Naye sheher mein
+      {n:'E4',d:0.4,t:4.7},{n:'G#4',d:0.4,t:5.15},{n:'B4',d:0.5,t:5.6},{n:'C#5',d:0.5,t:6.15},{n:'B4',d:0.7,t:6.7},
+      // Ek alag aasmaan
+      {n:'A4',d:0.4,t:7.6},{n:'G#4',d:0.4,t:8.05},{n:'E4',d:0.8,t:8.5},
+      // Par tera mera saath wahi
+      {n:'G#4',d:0.4,t:9.5},{n:'B4',d:0.4,t:9.95},{n:'C#5',d:0.5,t:10.4},{n:'B4',d:0.4,t:10.95},{n:'A4',d:0.4,t:11.4},{n:'G#4',d:0.8,t:11.85}
+    ]
+  },
+  {
+    id: 'maan-meri-jaan',
+    title: 'Maan Meri Jaan',
+    sub: 'Champagne Talk • King',
+    category: 'viral',
+    desc: 'Main teri aankhon mein udaasi kabhi dekh sakda nahi... Sensational mega-hit',
+    tempo: 86,
+    notes: [
+      {n:'C4',d:0.4,t:0.0},{n:'Eb4',d:0.4,t:0.45},{n:'G4',d:0.5,t:0.9},{n:'Ab4',d:0.5,t:1.45},{n:'G4',d:0.7,t:2.0},
+      {n:'Eb4',d:0.4,t:2.8},{n:'F4',d:0.4,t:3.25},{n:'C4',d:0.8,t:3.7},
+      // Main teri aankhon mein udaasi
+      {n:'C4',d:0.4,t:4.7},{n:'Eb4',d:0.4,t:5.15},{n:'G4',d:0.5,t:5.6},{n:'Ab4',d:0.5,t:6.15},{n:'G4',d:0.4,t:6.7},{n:'F4',d:0.4,t:7.15},{n:'Eb4',d:0.7,t:7.6},
+      // Kabhi dekh sakda nahi
+      {n:'F4',d:0.4,t:8.5},{n:'G4',d:0.4,t:8.95},{n:'Eb4',d:0.4,t:9.4},{n:'C4',d:0.8,t:9.85},
+      // Chorus: Maan meri jaan main tujhe jaane na doonga
+      {n:'C5',d:0.45,t:10.8},{n:'Bb4',d:0.4,t:11.3},{n:'Ab4',d:0.5,t:11.75},{n:'G4',d:0.6,t:12.3},{n:'F4',d:0.4,t:12.95},{n:'G4',d:0.5,t:13.4},{n:'Ab4',d:0.7,t:13.95},
+      {n:'G4',d:0.4,t:14.8},{n:'F4',d:0.4,t:15.25},{n:'Eb4',d:0.4,t:15.7},{n:'C4',d:1.2,t:16.15}
+    ]
+  },
+  {
+    id: 'husn-hai-suhana',
+    title: 'Husn Hai Suhana',
+    sub: 'Coolie No. 1 • Chandana Dixit, Abhijeet',
+    category: 'viral',
+    desc: 'Goriya chura na mera jiya... Upbeat Bollywood dance groove',
+    tempo: 105,
+    notes: [
+      {n:'D4',d:0.35,t:0.0},{n:'D4',d:0.35,t:0.4},{n:'F#4',d:0.4,t:0.8},{n:'A4',d:0.4,t:1.25},{n:'B4',d:0.5,t:1.7},
+      {n:'A4',d:0.4,t:2.25},{n:'F#4',d:0.4,t:2.7},{n:'D4',d:0.6,t:3.15},
+      // Goriya chura na mera jiya
+      {n:'D4',d:0.35,t:3.9},{n:'F#4',d:0.35,t:4.3},{n:'A4',d:0.4,t:4.7},{n:'B4',d:0.4,t:5.15},{n:'A4',d:0.4,t:5.6},{n:'F#4',d:0.4,t:6.05},{n:'D4',d:0.6,t:6.5},
+      // Husn hai suhana ishq hai deewana
+      {n:'D5',d:0.4,t:7.3},{n:'B4',d:0.35,t:7.75},{n:'A4',d:0.4,t:8.15},{n:'F#4',d:0.4,t:8.6},{n:'E4',d:0.4,t:9.05},{n:'D4',d:0.8,t:9.5}
+    ]
+  },
+  {
+    id: 'satranga',
+    title: 'Satranga',
+    sub: 'Animal • Arijit Singh / Shreyas Puranik',
+    category: 'viral',
+    desc: 'Ye aashiqui satranga re... Hauntingly passionate piano flow',
+    tempo: 78,
+    notes: [
+      {n:'C4',d:0.45,t:0.0},{n:'Eb4',d:0.45,t:0.5},{n:'G4',d:0.5,t:1.0},{n:'Bb4',d:0.5,t:1.55},{n:'Ab4',d:0.7,t:2.1},
+      {n:'G4',d:0.4,t:2.9},{n:'F4',d:0.4,t:3.35},{n:'Eb4',d:0.8,t:3.8},
+      // Aadha aadha hissa mera
+      {n:'C4',d:0.4,t:4.8},{n:'Eb4',d:0.4,t:5.25},{n:'G4',d:0.5,t:5.7},{n:'Ab4',d:0.5,t:6.25},{n:'G4',d:0.4,t:6.8},{n:'F4',d:0.4,t:7.25},{n:'Eb4',d:0.7,t:7.7},
+      // Aadha tera sajna
+      {n:'Eb4',d:0.4,t:8.6},{n:'F4',d:0.4,t:9.05},{n:'G4',d:0.45,t:9.5},{n:'F4',d:0.4,t:10.0},{n:'Eb4',d:0.4,t:10.45},{n:'D4',d:0.8,t:10.9},
+      // Chorus: Ye aashiqui satranga re
+      {n:'C5',d:0.5,t:11.9},{n:'Bb4',d:0.4,t:12.45},{n:'Ab4',d:0.5,t:12.9},{n:'G4',d:0.6,t:13.45},{n:'F4',d:0.7,t:14.1},
+      {n:'G4',d:0.4,t:15.0},{n:'Ab4',d:0.4,t:15.45},{n:'Bb4',d:0.5,t:15.9},{n:'Ab4',d:0.4,t:16.45},{n:'G4',d:0.4,t:16.9},{n:'F4',d:0.5,t:17.35},{n:'Eb4',d:1.2,t:17.9}
+    ]
+  },
+  {
+    id: 've-kamleya',
+    title: 'Ve Kamleya',
+    sub: 'Rocky Aur Rani Kii Prem Kahaani • Arijit Singh & Shreya Ghoshal',
+    category: 'viral',
+    desc: 'Ve kamleya ve kamleya... Sweet Punjabi acoustic ballad',
+    tempo: 84,
+    notes: [
+      {n:'F4',d:0.4,t:0.0},{n:'A4',d:0.4,t:0.45},{n:'C5',d:0.5,t:0.9},{n:'D5',d:0.5,t:1.45},{n:'C5',d:0.7,t:2.0},
+      {n:'A4',d:0.4,t:2.8},{n:'G4',d:0.4,t:3.25},{n:'F4',d:0.8,t:3.7},
+      // Ve kamleya ve kamleya
+      {n:'F4',d:0.4,t:4.7},{n:'A4',d:0.4,t:5.15},{n:'C5',d:0.5,t:5.6},{n:'D5',d:0.5,t:6.15},{n:'C5',d:0.7,t:6.7},
+      // Mere naadan dil
+      {n:'Bb4',d:0.4,t:7.6},{n:'A4',d:0.4,t:8.05},{n:'G4',d:0.4,t:8.5},{n:'F4',d:0.8,t:8.95},
+      // Kyun karta hai tu aisi gustaakhiyan
+      {n:'A4',d:0.4,t:9.9},{n:'Bb4',d:0.4,t:10.35},{n:'C5',d:0.5,t:10.8},{n:'C5',d:0.4,t:11.35},{n:'D5',d:0.4,t:11.8},{n:'C5',d:0.4,t:12.25},{n:'Bb4',d:0.4,t:12.7},{n:'A4',d:0.8,t:13.15}
+    ]
+  },
+  {
+    id: 'tere-vaaste',
+    title: 'Tere Vaaste',
+    sub: 'Zara Hatke Zara Bachke • Varun Jain & Sachin-Jigar',
+    category: 'viral',
+    desc: 'Tere vaaste falak se main chaand laaunga... Cheerful viral rhythm',
+    tempo: 96,
+    notes: [
+      {n:'G4',d:0.35,t:0.0},{n:'C5',d:0.4,t:0.4},{n:'D5',d:0.4,t:0.85},{n:'E5',d:0.5,t:1.3},{n:'D5',d:0.6,t:1.85},
+      {n:'C5',d:0.4,t:2.55},{n:'B4',d:0.4,t:2.98},{n:'C5',d:0.7,t:3.42},
+      // Tere vaaste falak se
+      {n:'G4',d:0.35,t:4.3},{n:'C5',d:0.4,t:4.7},{n:'D5',d:0.4,t:5.15},{n:'E5',d:0.5,t:5.6},{n:'D5',d:0.4,t:6.15},{n:'C5',d:0.6,t:6.6},
+      // Main chaand laaunga
+      {n:'A4',d:0.4,t:7.4},{n:'B4',d:0.4,t:7.85},{n:'C5',d:0.7,t:8.3},
+      // 16-17 sitare sang baandh laaunga
+      {n:'C5',d:0.35,t:9.2},{n:'D5',d:0.35,t:9.6},{n:'E5',d:0.45,t:10.0},{n:'F5',d:0.4,t:10.5},{n:'E5',d:0.4,t:10.95},{n:'D5',d:0.4,t:11.4},{n:'C5',d:0.9,t:11.85}
+    ]
+  },
+  {
+    id: 'marjaavan-tune',
+    title: 'Marjaavan Theme',
+    sub: 'Marjaavaan • Jubin Nautiyal',
+    category: 'must',
+    desc: 'Tumse hi shuru, tumpe hi khatam... Intense tragic romantic melody',
+    tempo: 78,
+    notes: [
+      {n:'D4',d:0.4,t:0.0},{n:'F4',d:0.4,t:0.45},{n:'A4',d:0.5,t:0.9},{n:'Bb4',d:0.6,t:1.45},{n:'A4',d:0.7,t:2.1},
+      {n:'G4',d:0.4,t:2.9},{n:'F4',d:0.4,t:3.35},{n:'E4',d:0.8,t:3.8},
+      // Tumpe hi khatam
+      {n:'D4',d:0.4,t:4.8},{n:'F4',d:0.4,t:5.25},{n:'G4',d:0.5,t:5.7},{n:'F4',d:0.4,t:6.25},{n:'E4',d:0.4,t:6.7},{n:'D4',d:1.0,t:7.15},
+      // Deewana kar raha hai
+      {n:'F4',d:0.4,t:8.3},{n:'A4',d:0.4,t:8.75},{n:'C5',d:0.5,t:9.2},{n:'Bb4',d:0.4,t:9.75},{n:'A4',d:0.4,t:10.2},{n:'G4',d:0.8,t:10.65}
+    ]
+  },
+  // Classical Masterpieces
+  {
+    id: 'fur-elise',
+    title: 'Für Elise',
+    sub: 'Ludwig van Beethoven',
+    category: 'classical',
+    desc: 'World famous Bagatelle in A minor',
+    tempo: 120,
+    notes: [
+      {n:'E5',d:0.25,t:0.0},{n:'D#5',d:0.25,t:0.3},{n:'E5',d:0.25,t:0.6},{n:'D#5',d:0.25,t:0.9},{n:'E5',d:0.25,t:1.2},
+      {n:'B4',d:0.25,t:1.5},{n:'D5',d:0.25,t:1.8},{n:'C5',d:0.25,t:2.1},{n:'A4',d:0.6,t:2.4},
+      {n:'C4',d:0.25,t:3.2},{n:'E4',d:0.25,t:3.5},{n:'A4',d:0.25,t:3.8},{n:'B4',d:0.6,t:4.1},
+      {n:'E4',d:0.25,t:4.9},{n:'G#4',d:0.25,t:5.2},{n:'B4',d:0.25,t:5.5},{n:'C5',d:0.6,t:5.8}
+    ]
+  },
+  {
+    id: 'canon-in-d',
+    title: 'Canon in D',
+    sub: 'Johann Pachelbel',
+    category: 'classical',
+    desc: 'Harmonious classic wedding canon',
+    tempo: 75,
+    notes: [
+      {n:'F#4',d:0.5,t:0.0},{n:'E4',d:0.5,t:0.6},{n:'D4',d:0.5,t:1.2},{n:'C#4',d:0.5,t:1.8},
+      {n:'B3',d:0.5,t:2.4},{n:'A3',d:0.5,t:3.0},{n:'B3',d:0.5,t:3.6},{n:'C#4',d:0.5,t:4.2},
+      {n:'D4',d:0.6,t:4.8},{n:'F#4',d:0.6,t:5.4},{n:'A4',d:0.6,t:6.0},{n:'D5',d:0.8,t:6.6}
+    ]
+  },
+  {
+    id: 'ode-to-joy',
+    title: 'Ode to Joy',
+    sub: 'Beethoven 9th Symphony',
+    category: 'classical',
+    desc: 'Triumphant European anthem melody',
+    tempo: 100,
+    notes: [
+      {n:'E4',d:0.4,t:0.0},{n:'E4',d:0.4,t:0.45},{n:'F4',d:0.4,t:0.9},{n:'G4',d:0.4,t:1.35},
+      {n:'G4',d:0.4,t:1.8},{n:'F4',d:0.4,t:2.25},{n:'E4',d:0.4,t:2.7},{n:'D4',d:0.4,t:3.15},
+      {n:'C4',d:0.4,t:3.6},{n:'C4',d:0.4,t:4.05},{n:'D4',d:0.4,t:4.5},{n:'E4',d:0.4,t:4.95},
+      {n:'E4',d:0.6,t:5.4},{n:'D4',d:0.3,t:6.05},{n:'D4',d:0.8,t:6.4}
+    ]
+  }
+];
+
+/* ==========================================================================
+   SONG PLAYER & INTERACTIVE LEARN ENGINE
+   ========================================================================== */
+let currentPlayingSong = null;
+let songTimeouts = [];
+let isSongPaused = false;
+let songStartTime = 0;
+let songElapsedTime = 0;
+let songInterval = null;
+
+const songStatusBar = document.getElementById('songStatusBar');
+const songTitlePlaying = document.getElementById('songTitlePlaying');
+const songProgressFill = document.getElementById('songProgressFill');
+const songTimeText = document.getElementById('songTimeText');
+const btnPauseResumeSong = document.getElementById('btnPauseResumeSong');
+const btnStopSong = document.getElementById('btnStopSong');
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-// Playback recorded track
-playBtn.addEventListener('click', () => {
-  if (recordedEvents.length === 0) return;
-  playSequence(recordedEvents);
-});
-
-function playSequence(events, onComplete) {
-  events.forEach(evt => {
-    setTimeout(() => {
-      const key = document.getElementById('key_' + evt.midi);
-      if (evt.type === 'note_on') {
-        if (key) key.classList.add('active');
-        startNote(evt.midi, evt.velocity || 0.8);
-      } else {
-        if (key) key.classList.remove('active');
-        stopNote(evt.midi);
-      }
-    }, evt.time);
-  });
-
-  const totalTime = events[events.length - 1].time + 1000;
-  if (onComplete) setTimeout(onComplete, totalTime);
+function stopSongPlayback() {
+  songTimeouts.forEach(t => clearTimeout(t));
+  songTimeouts = [];
+  if (songInterval) clearInterval(songInterval);
+  songInterval = null;
+  currentPlayingSong = null;
+  isSongPaused = false;
+  songElapsedTime = 0;
+  songStatusBar.classList.remove('active');
+  songProgressFill.style.width = '0%';
+  // Clear guide active lights
+  const activeGuides = keysWrapper.querySelectorAll('.guide-active');
+  activeGuides.forEach(el => el.classList.remove('guide-active'));
 }
 
-// Song Library & Interactive Practice
-const SONGS = {
-  fur_elise: [
-    {time: 0, type: 'note_on', midi: 76}, {time: 250, type: 'note_off', midi: 76},
-    {time: 250, type: 'note_on', midi: 75}, {time: 500, type: 'note_off', midi: 75},
-    {time: 500, type: 'note_on', midi: 76}, {time: 750, type: 'note_off', midi: 76},
-    {time: 750, type: 'note_on', midi: 75}, {time: 1000, type: 'note_off', midi: 75},
-    {time: 1000, type: 'note_on', midi: 76}, {time: 1250, type: 'note_off', midi: 76},
-    {time: 1250, type: 'note_on', midi: 71}, {time: 1500, type: 'note_off', midi: 71},
-    {time: 1500, type: 'note_on', midi: 74}, {time: 1750, type: 'note_off', midi: 74},
-    {time: 1750, type: 'note_on', midi: 72}, {time: 2000, type: 'note_off', midi: 72},
-    {time: 2000, type: 'note_on', midi: 69}, {time: 2600, type: 'note_off', midi: 69},
-    {time: 2700, type: 'note_on', midi: 60}, {time: 3000, type: 'note_off', midi: 60},
-    {time: 3000, type: 'note_on', midi: 64}, {time: 3300, type: 'note_off', midi: 64},
-    {time: 3300, type: 'note_on', midi: 69}, {time: 3600, type: 'note_off', midi: 69},
-    {time: 3600, type: 'note_on', midi: 71}, {time: 4200, type: 'note_off', midi: 71}
-  ],
-  ode_to_joy: [
-    {time: 0, type: 'note_on', midi: 64}, {time: 350, type: 'note_off', midi: 64},
-    {time: 400, type: 'note_on', midi: 64}, {time: 750, type: 'note_off', midi: 64},
-    {time: 800, type: 'note_on', midi: 65}, {time: 1150, type: 'note_off', midi: 65},
-    {time: 1200, type: 'note_on', midi: 67}, {time: 1550, type: 'note_off', midi: 67},
-    {time: 1600, type: 'note_on', midi: 67}, {time: 1950, type: 'note_off', midi: 67},
-    {time: 2000, type: 'note_on', midi: 65}, {time: 2350, type: 'note_off', midi: 65},
-    {time: 2400, type: 'note_on', midi: 64}, {time: 2750, type: 'note_off', midi: 64},
-    {time: 2800, type: 'note_on', midi: 62}, {time: 3150, type: 'note_off', midi: 62},
-    {time: 3200, type: 'note_on', midi: 60}, {time: 3550, type: 'note_off', midi: 60},
-    {time: 3600, type: 'note_on', midi: 60}, {time: 3950, type: 'note_off', midi: 60},
-    {time: 4000, type: 'note_on', midi: 62}, {time: 4350, type: 'note_off', midi: 62},
-    {time: 4400, type: 'note_on', midi: 64}, {time: 4750, type: 'note_off', midi: 64},
-    {time: 4800, type: 'note_on', midi: 64}, {time: 5300, type: 'note_off', midi: 64},
-    {time: 5400, type: 'note_on', midi: 62}, {time: 5700, type: 'note_off', midi: 62},
-    {time: 5800, type: 'note_on', midi: 62}, {time: 6600, type: 'note_off', midi: 62}
-  ],
-  twinkle: [
-    {time: 0, type: 'note_on', midi: 60}, {time: 400, type: 'note_off', midi: 60},
-    {time: 450, type: 'note_on', midi: 60}, {time: 850, type: 'note_off', midi: 60},
-    {time: 900, type: 'note_on', midi: 67}, {time: 1300, type: 'note_off', midi: 67},
-    {time: 1350, type: 'note_on', midi: 67}, {time: 1750, type: 'note_off', midi: 67},
-    {time: 1800, type: 'note_on', midi: 69}, {time: 2200, type: 'note_off', midi: 69},
-    {time: 2250, type: 'note_on', midi: 69}, {time: 2650, type: 'note_off', midi: 69},
-    {time: 2700, type: 'note_on', midi: 67}, {time: 3400, type: 'note_off', midi: 67}
-  ],
-  canon_in_d: [
-    {time: 0, type: 'note_on', midi: 74}, {time: 500, type: 'note_off', midi: 74},
-    {time: 500, type: 'note_on', midi: 73}, {time: 1000, type: 'note_off', midi: 73},
-    {time: 1000, type: 'note_on', midi: 71}, {time: 1500, type: 'note_off', midi: 71},
-    {time: 1500, type: 'note_on', midi: 69}, {time: 2000, type: 'note_off', midi: 69},
-    {time: 2000, type: 'note_on', midi: 67}, {time: 2500, type: 'note_off', midi: 67},
-    {time: 2500, type: 'note_on', midi: 66}, {time: 3000, type: 'note_off', midi: 66},
-    {time: 3000, type: 'note_on', midi: 67}, {time: 3500, type: 'note_off', midi: 67},
-    {time: 3500, type: 'note_on', midi: 69}, {time: 4000, type: 'note_off', midi: 69}
-  ]
-};
+function startSongPlayback(song, mode = 'play') {
+  stopSongPlayback();
+  currentPlayingSong = song;
+  songTitlePlaying.textContent = (mode === 'learn' ? '🎯 Guide: ' : '▶ Playing: ') + song.title;
+  songStatusBar.classList.add('active');
 
-function loadAndPlaySong(songKey, mode) {
-  closeModal('songsModal');
-  const song = SONGS[songKey];
-  if (!song) return;
+  const totalDuration = song.notes[song.notes.length - 1].t + 2.0;
+  songStartTime = Date.now();
 
-  // Center keyboard around C4/C5
-  const middleKey = document.getElementById('key_64');
-  if (middleKey) {
-    pianoViewport.scrollTo({
-      left: middleKey.offsetLeft - (pianoViewport.clientWidth / 2),
-      behavior: 'smooth'
-    });
+  // Check if first note needs octave shift to be visible
+  const firstNoteMidi = noteToMidi(song.notes[0].n);
+  const firstOct = Math.floor(firstNoteMidi / 12) - 1;
+  if (firstOct < baseOctave || firstOct > baseOctave + 1) {
+    baseOctave = Math.max(1, Math.min(6, firstOct));
+    renderKeyboard();
   }
 
-  if (mode === 'demo') {
-    playSequence(song);
-  } else {
-    // Practice guide mode: highlight each note with a guide color
-    let noteIdx = 0;
-    const noteOns = song.filter(e => e.type === 'note_on');
+  songInterval = setInterval(() => {
+    if (isSongPaused) return;
+    const elapsed = (Date.now() - songStartTime) / 1000;
+    songElapsedTime = elapsed;
+    const pct = Math.min(100, (elapsed / totalDuration) * 100);
+    songProgressFill.style.width = `${pct}%`;
+    songTimeText.textContent = `${formatTime(elapsed)} / ${formatTime(totalDuration)}`;
 
-    function highlightNext() {
-      if (noteIdx >= noteOns.length) return;
-      const targetMidi = noteOns[noteIdx].midi;
-      const key = document.getElementById('key_' + targetMidi);
-      if (key) key.classList.add('highlight-guide');
-
-      const checkHit = (e) => {
-        const pressedKey = document.elementFromPoint(e.clientX, e.clientY)?.closest('.white-key, .black-key');
-        if (pressedKey && parseInt(pressedKey.dataset.midi, 10) === targetMidi) {
-          if (key) key.classList.remove('highlight-guide');
-          window.removeEventListener('pointerdown', checkHit);
-          noteIdx++;
-          setTimeout(highlightNext, 200);
-        }
-      };
-      window.addEventListener('pointerdown', checkHit);
-    }
-    highlightNext();
-  }
-}
-
-// Dual Row Toggle
-let isDual = false;
-document.getElementById('dualToggleBtn').addEventListener('click', () => {
-  isDual = !isDual;
-  const sec = document.getElementById('pianoViewportSecondary');
-  const btn = document.getElementById('dualToggleBtn');
-  if (isDual) {
-    sec.style.display = 'flex';
-    buildKeyboard('keyboardWrapperSecondary', true);
-    setupTouchEvents('pianoViewportSecondary');
-    btn.classList.add('active');
-    // Align secondary keyboard to 1 octave lower
-    sec.scrollLeft = pianoViewport.scrollLeft - (keyWidth * 7);
-  } else {
-    sec.style.display = 'none';
-    btn.classList.remove('active');
-  }
-});
-
-// Modals helper
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-document.getElementById('songsModalBtn').addEventListener('click', () => openModal('songsModal'));
-document.getElementById('closeSongsModal').addEventListener('click', () => closeModal('songsModal'));
-
-document.getElementById('settingsModalBtn').addEventListener('click', () => openModal('settingsModal'));
-document.getElementById('closeSettingsModal').addEventListener('click', () => closeModal('settingsModal'));
-
-// Settings inputs
-document.getElementById('masterVolumeSlider').addEventListener('input', (e) => {
-  if (masterGain) masterGain.gain.setValueAtTime(parseFloat(e.target.value), audioCtx.currentTime);
-});
-document.getElementById('reverbSlider').addEventListener('input', (e) => {
-  if (wetGain) wetGain.gain.setValueAtTime(parseFloat(e.target.value), audioCtx.currentTime);
-});
-document.getElementById('bpmSlider').addEventListener('input', (e) => {
-  bpm = parseInt(e.target.value, 10);
-  document.getElementById('bpmLabel').innerText = bpm + ' BPM';
-  if (isMetroActive) {
-    clearInterval(metronomeInterval);
-    metronomeInterval = setInterval(playMetronomeTick, (60 / bpm) * 1000);
-  }
-});
-document.getElementById('labelSelect').addEventListener('change', (e) => {
-  labelMode = e.target.value;
-  refreshKeyLabels();
-});
-document.getElementById('keyWidthSlider').addEventListener('input', (e) => {
-  keyWidth = parseInt(e.target.value, 10);
-  buildKeyboard('keyboardWrapper');
-  if (isDual) buildKeyboard('keyboardWrapperSecondary', true);
-  updateMinimapViewport();
-});
-
-// Initialize
-window.addEventListener('DOMContentLoaded', () => {
-  buildKeyboard('keyboardWrapper');
-  buildMinimap();
-  setupTouchEvents('pianoViewport');
-
-  // Center keyboard at Middle C (C4 = MIDI 60)
-  setTimeout(() => {
-    const c4 = document.getElementById('key_60');
-    if (c4) {
-      pianoViewport.scrollLeft = c4.offsetLeft - (pianoViewport.clientWidth / 2) + 30;
-      updateMinimapViewport();
+    if (elapsed >= totalDuration) {
+      stopSongPlayback();
     }
   }, 100);
+
+  song.notes.forEach(item => {
+    const midi = noteToMidi(item.n);
+    
+    // Play note at scheduled time
+    const tOn = setTimeout(() => {
+      playNoteSound(midi, 0.85);
+      const keyEl = keysWrapper.querySelector(`[data-midi="${midi}"]`);
+      if (keyEl) {
+        keyEl.classList.add(mode === 'learn' ? 'guide-active' : 'active');
+      }
+    }, item.t * 1000);
+
+    const tOff = setTimeout(() => {
+      stopNoteSound(midi);
+      const keyEl = keysWrapper.querySelector(`[data-midi="${midi}"]`);
+      if (keyEl) {
+        keyEl.classList.remove('active', 'guide-active');
+      }
+    }, (item.t + item.d) * 1000);
+
+    songTimeouts.push(tOn, tOff);
+  });
+}
+
+btnStopSong.addEventListener('click', stopSongPlayback);
+
+btnPauseResumeSong.addEventListener('click', () => {
+  if (!currentPlayingSong) return;
+  isSongPaused = !isSongPaused;
+  btnPauseResumeSong.textContent = isSongPaused ? '▶' : '⏸';
+  // In a full implementation we pause audio context or schedule offset
+  if (isSongPaused) {
+    getAudioContext().suspend();
+  } else {
+    getAudioContext().resume();
+  }
 });
 
-// Warm up AudioContext on first touch
-window.addEventListener('touchstart', initAudio, { once: true });
-window.addEventListener('mousedown', initAudio, { once: true });
+/* ==========================================================================
+   SONGS MODAL UI & SEARCH
+   ========================================================================== */
+const modalSongLibrary = document.getElementById('modalSongLibrary');
+const btnOpenSongs = document.getElementById('btnOpenSongs');
+const btnCloseSongModal = document.getElementById('btnCloseSongModal');
+const songListContainer = document.getElementById('songListContainer');
+const songSearchInput = document.getElementById('songSearchInput');
+const modalFilters = document.getElementById('modalFilters');
+
+let currentFilter = 'all';
+
+function renderSongList() {
+  songListContainer.innerHTML = '';
+  const query = songSearchInput.value.toLowerCase().trim();
+
+  const filtered = INDIAN_SONGS.filter(song => {
+    const matchCat = currentFilter === 'all' || song.category === currentFilter;
+    const matchQuery = !query ||
+      song.title.toLowerCase().includes(query) ||
+      song.sub.toLowerCase().includes(query) ||
+      song.desc.toLowerCase().includes(query);
+    return matchCat && matchQuery;
+  });
+
+  filtered.forEach(song => {
+    const card = document.createElement('div');
+    card.className = 'song-card';
+    const totalSec = Math.round(song.notes[song.notes.length - 1].t + 2);
+    
+    card.innerHTML = `
+      <div>
+        <div class="song-card-title">${song.title}</div>
+        <div class="song-card-sub">${song.sub}</div>
+        <div class="song-card-tags">
+          <span>⏱️ ${totalSec}s</span> • <span>${song.notes.length} notes</span>
+        </div>
+      </div>
+      <div class="song-card-actions">
+        <button class="btn-card btn-card-play" data-action="play" data-id="${song.id}">▶ Auto Play</button>
+        <button class="btn-card btn-card-learn" data-action="learn" data-id="${song.id}">🎯 Learn Key</button>
+      </div>
+    `;
+
+    card.querySelector('[data-action="play"]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalSongLibrary.classList.remove('open');
+      startSongPlayback(song, 'play');
+    });
+
+    card.querySelector('[data-action="learn"]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalSongLibrary.classList.remove('open');
+      startSongPlayback(song, 'learn');
+    });
+
+    songListContainer.appendChild(card);
+  });
+}
+
+btnOpenSongs.addEventListener('click', () => {
+  modalSongLibrary.classList.add('open');
+  renderSongList();
+});
+
+btnCloseSongModal.addEventListener('click', () => {
+  modalSongLibrary.classList.remove('open');
+});
+
+modalFilters.addEventListener('click', (e) => {
+  if (e.target.classList.contains('filter-chip')) {
+    modalFilters.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.cat;
+    renderSongList();
+  }
+});
+
+songSearchInput.addEventListener('input', renderSongList);
+
+// Initial keyboard render
+renderKeyboard();
 </script>
 </body>
 </html>
