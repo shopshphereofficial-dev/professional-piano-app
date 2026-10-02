@@ -27,12 +27,12 @@ jobs:
         with:
           gradle-version: '8.4'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Accept Android SDK Licenses
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
 
       - name: Build Debug APK
         run: |
-          echo "sdk.dir=$ANDROID_HOME" > local.properties
           gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK Artifact
@@ -46,17 +46,8 @@ jobs:
         with:
           tag_name: v1.0.0
           name: Piano Master Pro v1.0.0
-          body: |
-            ## Piano Master Professional v1.0.0
-
-            Full concert grand piano app for Android.
-            
-            - 88-Key Full Piano Keyboard with multi-touch
-            - Grand Piano, Electric Rhodes, Church Organ, Synth Pad
-            - Dual Keyboard Mode & Octave Transpose
-            - Studio Recorder & Playback
-            - Interactive Song Library (Für Elise, Ode to Joy, Canon in D, Twinkle)
-            - Metronome & Sustain Pedal
+          draft: false
+          prerelease: false
           files: app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
