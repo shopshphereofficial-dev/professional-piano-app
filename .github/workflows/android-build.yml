@@ -28,20 +28,8 @@ jobs:
           gradle-version: '8.4'
 
       - name: Build Debug APK
-        id: build_step
-        continue-on-error: true
         run: |
-          gradle assembleDebug --no-daemon --stacktrace > build.log 2>&1
-
-      - name: Commit build log on failure
-        if: steps.build_step.outcome != 'success'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add build.log
-          git commit -m "Diagnostic build log"
-          git push origin main
-          exit 1
+          gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
@@ -56,6 +44,19 @@ jobs:
           name: Piano Master Pro v1.0.0
           draft: false
           prerelease: false
+          body: |
+            ## Piano Master Professional v1.0.0
+
+            Enjoy the full concert grand piano experience directly on your Android device!
+
+            ### Key Features:
+            - **Full 88-Key Keyboard**: Multi-touch support with realistic touch physics and quick octave slider navigation.
+            - **Studio Audio Engines**: Acoustic Grand Piano, Rhodes Electric Piano, Church Organ, and Synth Pad.
+            - **Dual-Row Split Keyboard**: Play bass line and melody simultaneously across two independent octave rows.
+            - **Performance Recorder**: Record your original pieces in real-time and replay with illuminated keys.
+            - **Interactive Song Library**: Practice Beethoven's Für Elise, Ode to Joy, Pachelbel's Canon in D, and Twinkle Twinkle with interactive guide modes.
+            - **Studio Metronome & Sustain Pedal**: Precision timing with tap tempo and acoustic sustain pedal emulation.
+            - **Reverb & Tuning Modes**: Scientific pitch notation (C4) and Solfege (Do-Re-Mi) options with concert hall acoustics.
           files: app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
