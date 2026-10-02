@@ -27,13 +27,21 @@ jobs:
         with:
           gradle-version: '8.4'
 
-      - name: Accept Android SDK Licenses
-        run: |
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
-
       - name: Build Debug APK
+        id: build_step
+        continue-on-error: true
         run: |
-          gradle assembleDebug --no-daemon --stacktrace
+          gradle assembleDebug --no-daemon --stacktrace > build.log 2>&1
+
+      - name: Commit build log on failure
+        if: steps.build_step.outcome != 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add build.log
+          git commit -m "Diagnostic build log"
+          git push origin main
+          exit 1
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
