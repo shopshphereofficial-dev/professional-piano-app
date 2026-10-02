@@ -1,0 +1,60 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
+
+      - name: Build Debug APK
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PianoMaster-v1.0.0-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/heads/')
+        with:
+          tag_name: v1.0.0
+          name: Piano Master Pro v1.0.0
+          body: |
+            ## Piano Master Professional v1.0.0
+
+            Enjoy the full concert grand piano experience directly on your Android phone!
+
+            ### Features:
+            - **88-Key Full Piano Keyboard**: Ultra-responsive multi-touch with realistic ivory feel and smooth octave scrolling.
+            - **Studio Instrument Engines**: Grand Piano, Rhodes Electric Piano, Cathedral Organ, and Lush Synth Strings.
+            - **Dual Keyboard Mode**: Play two separate octave ranges simultaneously with split view.
+            - **Studio Recorder & Playback**: Capture your songs with note accuracy and play them back live.
+            - **Song Library & Interactive Tutorials**: Learn Für Elise, Ode to Joy, Twinkle Twinkle, and Canon in D with visual key guidance.
+            - **Sustain Pedal & Metronome**: High-precision studio metronome with tap tempo and acoustic sustain simulation.
+            - **Concert Reverb & Tuning**: Built-in room acoustic reverb and scientific/solfege note labels.
+          files: app/build/outputs/apk/debug/app-debug.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
